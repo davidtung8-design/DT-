@@ -100,6 +100,319 @@
             z-index: 1;
         }
 
+        /* 目标追踪区域 */
+        .goals-section {
+            background: linear-gradient(135deg, #1e3a2f, #2d6a4f);
+            border-radius: 32px;
+            padding: 18px 22px;
+            margin: 12px 0 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .goals-section::before {
+            content: "🏆🎯⭐";
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            font-size: 80px;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+        
+        .goals-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .goals-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ff8c42;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .goals-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .goal-card {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 16px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .goal-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .goal-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffd9a5;
+            margin-bottom: 8px;
+        }
+        
+        .goal-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 4px;
+        }
+        
+        .goal-target {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 12px;
+        }
+        
+        .goal-progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        
+        .goal-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff8c42, #ffb347);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .goal-percent {
+            font-size: 12px;
+            color: #ff8c42;
+            font-weight: 600;
+            text-align: right;
+        }
+        
+        .goal-input-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .goal-input {
+            flex: 1;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #1e3a2f;
+        }
+        
+        .goal-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #ff8c42;
+        }
+        
+        .goal-update-btn {
+            background: #ff8c42;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .goal-update-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .affirmation {
+            margin-top: 16px;
+            text-align: center;
+            padding: 12px;
+            background: rgba(255,140,66,0.2);
+            border-radius: 40px;
+            border-left: 4px solid #ff8c42;
+        }
+        
+        .affirmation-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffd9a5;
+            letter-spacing: 1px;
+        }
+        
+        .affirmation-sub {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+        }
+
+        /* 头部 - 滚动时缩小效果 */
+        .header {
+            padding: 20px 0 12px;
+            background: rgba(255,255,250,0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 0 0 32px 32px;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            border-bottom: 3px solid #ff8c42;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        
+        .header.scrolled {
+            padding: 8px 0 6px;
+            backdrop-filter: blur(20px);
+            background: rgba(255,255,250,0.98);
+        }
+        
+        .header.scrolled h1 {
+            font-size: 20px;
+        }
+        
+        .header.scrolled .sub {
+            display: none;
+        }
+        
+        .header.scrolled .energy-badge {
+            padding: 3px 8px;
+            font-size: 10px;
+        }
+        
+        .title-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e4a38, #2d6a4f, #ff8c42, #ffb347);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: font-size 0.3s ease;
+        }
+        
+        .title-decor {
+            display: inline-flex;
+            gap: 6px;
+        }
+        
+        .header-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .energy-badge {
+            background: rgba(255,140,66,0.15);
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #ff8c42;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-badge {
+            background: rgba(64,145,108,0.15);
+            color: #40916c;
+        }
+        
+        .sub {
+            color: #527a6e;
+            font-size: 12px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            transition: all 0.3s ease;
+        }
+        
+        .action-bar {
+            display: flex;
+            gap: 10px;
+            margin: 16px 0 12px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        
+        .btn {
+            background: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #2d6a4f;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #ff8c42, #ffb347);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255,140,66,0.3);
+        }
+        .btn-primary:active { transform: scale(0.96); }
+        .btn-outline {
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #c8e0ca;
+        }
+        .btn-history {
+            background: linear-gradient(135deg, #40916c, #2d6a4f);
+            color: white;
+        }
+        .btn-calendar {
+            background: linear-gradient(135deg, #1f5e8c, #3a7ca8);
+            color: white;
+        }
+        .btn-google {
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            color: white;
+        }
+        .btn-import {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+        }
+        .btn-export-all {
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+            color: white;
+        }
+
         /* 图表区域样式 */
         .stats-section {
             background: linear-gradient(135deg, #fff9ef, #fff5e8);
@@ -252,130 +565,6 @@
         .timeline-wrapper::-webkit-scrollbar-thumb {
             background: #ff8c42;
             border-radius: 10px;
-        }
-
-        .header {
-            padding: 20px 0 12px;
-            background: rgba(255,255,250,0.95);
-            backdrop-filter: blur(12px);
-            border-radius: 0 0 32px 32px;
-            position: sticky;
-            top: env(safe-area-inset-top);
-            z-index: 20;
-            border-bottom: 3px solid #ff8c42;
-            text-align: left;
-        }
-        
-        .title-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        
-        h1 {
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #1e4a38, #2d6a4f, #ff8c42, #ffb347);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .title-decor {
-            display: inline-flex;
-            gap: 6px;
-        }
-        
-        .header-badges {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        
-        .energy-badge {
-            background: rgba(255,140,66,0.15);
-            padding: 6px 12px;
-            border-radius: 40px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #ff8c42;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .calendar-badge {
-            background: rgba(64,145,108,0.15);
-            color: #40916c;
-        }
-        
-        .sub {
-            color: #527a6e;
-            font-size: 12px;
-            margin-top: 12px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        
-        .action-bar {
-            display: flex;
-            gap: 10px;
-            margin: 16px 0 12px;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-        }
-        
-        .btn {
-            background: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 40px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            color: #2d6a4f;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #ff8c42, #ffb347);
-            color: white;
-            box-shadow: 0 4px 12px rgba(255,140,66,0.3);
-        }
-        .btn-primary:active { transform: scale(0.96); }
-        .btn-outline {
-            background: rgba(255,255,255,0.9);
-            border: 1px solid #c8e0ca;
-        }
-        .btn-history {
-            background: linear-gradient(135deg, #40916c, #2d6a4f);
-            color: white;
-        }
-        .btn-calendar {
-            background: linear-gradient(135deg, #1f5e8c, #3a7ca8);
-            color: white;
-        }
-        .btn-google {
-            background: linear-gradient(135deg, #4285f4, #34a853);
-            color: white;
-        }
-        .btn-import {
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
-            color: white;
-        }
-        .btn-export-all {
-            background: linear-gradient(135deg, #e67e22, #f39c12);
-            color: white;
         }
 
         .todo-section {
@@ -993,6 +1182,7 @@
             .btn { padding: 6px 12px; font-size: 11px; white-space: nowrap; }
             .action-bar { gap: 6px; }
             .chart-box { min-width: 100%; }
+            .goal-card { min-width: 100%; }
         }
     </style>
 </head>
@@ -1012,7 +1202,7 @@
 </div>
 
 <div class="app-container">
-    <div class="header">
+    <div class="header" id="mainHeader">
         <div class="title-wrapper">
             <div><h1><span class="title-decor">🌿</span>David Tung 时间管理大师 2026<span class="title-decor">🔥</span></h1></div>
             <div class="header-badges">
@@ -1032,7 +1222,53 @@
         </div>
     </div>
 
-    <!-- 📊 时间分析图表区域 - 新增 -->
+    <!-- 🎯 目标追踪区域 - 新增 -->
+    <div class="goals-section">
+        <div class="goals-header">
+            <div class="goals-title">
+                <span>🎯</span> 我的年度目标
+                <span style="font-size:12px; color:#ffd9a5;">(成功吸引成功，我是超级卓越主管)</span>
+            </div>
+        </div>
+        <div class="goals-grid">
+            <!-- GSPC 目标 -->
+            <div class="goal-card">
+                <div class="goal-icon">💰</div>
+                <div class="goal-name">GSPC 业绩目标</div>
+                <div class="goal-value" id="gspcValue">0</div>
+                <div class="goal-target">目标: 450,000</div>
+                <div class="goal-progress-bar">
+                    <div class="goal-progress-fill" id="gspcFill" style="width: 0%"></div>
+                </div>
+                <div class="goal-percent" id="gspcPercent">0%</div>
+                <div class="goal-input-group">
+                    <input type="number" class="goal-input" id="gspcInput" placeholder="输入当前业绩" value="0">
+                    <button class="goal-update-btn" onclick="updateGSPC()">更新</button>
+                </div>
+            </div>
+            <!-- 招聘新人目标 -->
+            <div class="goal-card">
+                <div class="goal-icon">👥</div>
+                <div class="goal-name">团队招聘新人</div>
+                <div class="goal-value" id="recruitValue">0</div>
+                <div class="goal-target">目标: 10 位</div>
+                <div class="goal-progress-bar">
+                    <div class="goal-progress-fill" id="recruitFill" style="width: 0%"></div>
+                </div>
+                <div class="goal-percent" id="recruitPercent">0%</div>
+                <div class="goal-input-group">
+                    <input type="number" class="goal-input" id="recruitInput" placeholder="输入已招聘人数" value="0">
+                    <button class="goal-update-btn" onclick="updateRecruit()">更新</button>
+                </div>
+            </div>
+        </div>
+        <div class="affirmation">
+            <div class="affirmation-text">🏆 成功吸引成功，我是超级卓越主管！🏆</div>
+            <div class="affirmation-sub">每一天都在向目标迈进 | 坚持就是胜利</div>
+        </div>
+    </div>
+
+    <!-- 📊 时间分析图表区域 -->
     <div class="stats-section" id="statsSection">
         <div class="stats-header">
             <div class="stats-title">
@@ -1099,6 +1335,62 @@
 <input type="file" id="fileInput" accept=".json" style="display:none">
 
 <script>
+    // ========== 目标追踪功能 ==========
+    const GSPC_TARGET = 450000;
+    const RECRUIT_TARGET = 10;
+    
+    function loadGoals() {
+        let gspc = localStorage.getItem('david_tung_gspc');
+        let recruit = localStorage.getItem('david_tung_recruit');
+        if (gspc === null) gspc = 0;
+        if (recruit === null) recruit = 0;
+        updateGoalUI(parseInt(gspc), parseInt(recruit));
+        document.getElementById('gspcInput').value = gspc;
+        document.getElementById('recruitInput').value = recruit;
+    }
+    
+    function saveGoals(gspc, recruit) {
+        localStorage.setItem('david_tung_gspc', gspc);
+        localStorage.setItem('david_tung_recruit', recruit);
+    }
+    
+    function updateGoalUI(gspc, recruit) {
+        // 更新 GSPC
+        document.getElementById('gspcValue').innerText = gspc.toLocaleString();
+        let gspcPercent = Math.min(100, Math.round((gspc / GSPC_TARGET) * 100));
+        document.getElementById('gspcFill').style.width = gspcPercent + '%';
+        document.getElementById('gspcPercent').innerText = gspcPercent + '%';
+        
+        // 更新招聘
+        document.getElementById('recruitValue').innerText = recruit;
+        let recruitPercent = Math.min(100, Math.round((recruit / RECRUIT_TARGET) * 100));
+        document.getElementById('recruitFill').style.width = recruitPercent + '%';
+        document.getElementById('recruitPercent').innerText = recruitPercent + '%';
+        
+        // 保存
+        saveGoals(gspc, recruit);
+    }
+    
+    function updateGSPC() {
+        let input = document.getElementById('gspcInput');
+        let value = parseInt(input.value) || 0;
+        let currentRecruit = parseInt(localStorage.getItem('david_tung_recruit')) || 0;
+        updateGoalUI(value, currentRecruit);
+        showToast(`✅ GSPC 已更新为 ${value.toLocaleString()}`, 1500);
+    }
+    
+    function updateRecruit() {
+        let input = document.getElementById('recruitInput');
+        let value = parseInt(input.value) || 0;
+        let currentGspc = parseInt(localStorage.getItem('david_tung_gspc')) || 0;
+        updateGoalUI(currentGspc, value);
+        showToast(`✅ 招聘人数已更新为 ${value} 位`, 1500);
+    }
+    
+    // 将函数挂载到 window 以便 onclick 调用
+    window.updateGSPC = updateGSPC;
+    window.updateRecruit = updateRecruit;
+    
     (function(){
         // ---------- 500条语录 ----------
         const ENCOURAGEMENTS = [];
@@ -1139,15 +1431,6 @@
             { id:20, group:"red", icon:"🛒", color:"#FFB3B3", border:"#e65c5c", bg:"#FFE8E8", name:"Informal Visiting", shortName:"Visiting" }
         ];
         
-        // 按组分类
-        const GROUP_CATEGORIES = {
-            green: { name: "销售核心", icon: "💰", color: "#5a9e5a" },
-            yellow: { name: "规划支持", icon: "📋", color: "#E6C300" },
-            orange: { name: "招募拓展", icon: "👥", color: "#E67E22" },
-            blue: { name: "学习会议", icon: "📚", color: "#3399ff" },
-            red: { name: "生活平衡", icon: "🌿", color: "#e65c5c" }
-        };
-        
         const GROUP_CONFIG = { green:{ icon:"📈", name:"销售核心", color:"#5a9e5a" }, yellow:{ icon:"📋", name:"规划支持", color:"#E6C300" }, orange:{ icon:"👥", name:"招募拓展", color:"#E67E22" }, blue:{ icon:"📚💡", name:"学习会议", color:"#3399ff" }, red:{ icon:"🌿", name:"生活平衡", color:"#e65c5c" } };
         
         const HOURS_24 = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,0,1,2,3,4,5];
@@ -1182,6 +1465,18 @@
         let timeChart = null;
         let currentChartRange = "week";
         
+        // ========== 头部滚动缩小效果 ==========
+        const header = document.getElementById('mainHeader');
+        if (header) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+        
         // ========== 图表统计功能 ==========
         function calculateTimeStats(range) {
             const now = new Date();
@@ -1189,23 +1484,8 @@
             const currentMonth = now.getMonth();
             const currentWeekStart = getMonday(now);
             
-            // 按组统计时长
-            const groupHours = {
-                green: 0,
-                yellow: 0,
-                orange: 0,
-                blue: 0,
-                red: 0
-            };
-            
-            // 按时间段统计（上午、下午、晚上、深夜）
-            const timeSlots = {
-                morning: 0,    // 6:00 - 11:59
-                afternoon: 0,  // 12:00 - 17:59
-                evening: 0,    // 18:00 - 22:59
-                night: 0       // 23:00 - 5:59
-            };
-            
+            const groupHours = { green: 0, yellow: 0, orange: 0, blue: 0, red: 0 };
+            const timeSlots = { morning: 0, afternoon: 0, evening: 0, night: 0 };
             let totalHours = 0;
             let eventCount = 0;
             
@@ -1214,15 +1494,12 @@
                 let include = false;
                 
                 if (range === "week") {
-                    // 本周
                     const weekEnd = new Date(currentWeekStart);
                     weekEnd.setDate(weekEnd.getDate() + 7);
                     include = eventDate >= currentWeekStart && eventDate < weekEnd;
                 } else if (range === "month") {
-                    // 本月
                     include = eventDate.getFullYear() === currentYear && eventDate.getMonth() === currentMonth;
                 } else {
-                    // 全部
                     include = true;
                 }
                 
@@ -1235,7 +1512,6 @@
                     totalHours += duration;
                     eventCount++;
                     
-                    // 按时间段统计
                     const hour = ev.startHour;
                     if (hour >= 6 && hour < 12) timeSlots.morning += duration;
                     else if (hour >= 12 && hour < 18) timeSlots.afternoon += duration;
@@ -1250,9 +1526,7 @@
         function getEventDuration(ev) {
             let start = ev.startHour;
             let end = ev.endHour;
-            if (end <= start) {
-                return (24 - start) + end;
-            }
+            if (end <= start) return (24 - start) + end;
             return end - start;
         }
         
@@ -1269,11 +1543,6 @@
         function updateCharts() {
             const stats = calculateTimeStats(currentChartRange);
             
-            // 准备饼图数据
-            const groupLabels = [];
-            const groupData = [];
-            const groupColors = [];
-            
             const groupOrder = [
                 { key: "green", name: "💰 销售核心", color: "#5a9e5a" },
                 { key: "yellow", name: "📋 规划支持", color: "#E6C300" },
@@ -1281,6 +1550,10 @@
                 { key: "blue", name: "📚 学习会议", color: "#3399ff" },
                 { key: "red", name: "🌿 生活平衡", color: "#e65c5c" }
             ];
+            
+            const groupLabels = [];
+            const groupData = [];
+            const groupColors = [];
             
             groupOrder.forEach(g => {
                 if (stats.groupHours[g.key] > 0) {
@@ -1290,109 +1563,43 @@
                 }
             });
             
-            // 如果没有任何数据，显示提示
             if (groupData.length === 0) {
                 groupLabels.push("暂无数据");
                 groupData.push(1);
                 groupColors.push("#cccccc");
             }
             
-            // 更新类别饼图
-            if (categoryChart) {
-                categoryChart.destroy();
-            }
+            if (categoryChart) categoryChart.destroy();
             const categoryCtx = document.getElementById('categoryChart').getContext('2d');
             categoryChart = new Chart(categoryCtx, {
                 type: 'doughnut',
-                data: {
-                    labels: groupLabels,
-                    datasets: [{
-                        data: groupData,
-                        backgroundColor: groupColors,
-                        borderWidth: 0,
-                        borderRadius: 8,
-                        spacing: 5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { font: { size: 10 } } },
-                        tooltip: { callbacks: { label: function(context) { return `${context.label}: ${context.raw} 小时`; } } }
-                    }
-                }
+                data: { labels: groupLabels, datasets: [{ data: groupData, backgroundColor: groupColors, borderWidth: 0, borderRadius: 8, spacing: 5 }] },
+                options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } }, tooltip: { callbacks: { label: function(context) { return `${context.label}: ${context.raw} 小时`; } } } } }
             });
             
-            // 时间段数据
             const timeLabels = ["🌅 上午 (6-12点)", "☀️ 下午 (12-18点)", "🌙 晚上 (18-23点)", "🌚 深夜 (23-6点)"];
-            const timeData = [
-                Math.round(stats.timeSlots.morning * 10) / 10,
-                Math.round(stats.timeSlots.afternoon * 10) / 10,
-                Math.round(stats.timeSlots.evening * 10) / 10,
-                Math.round(stats.timeSlots.night * 10) / 10
-            ];
+            const timeData = [Math.round(stats.timeSlots.morning * 10) / 10, Math.round(stats.timeSlots.afternoon * 10) / 10, Math.round(stats.timeSlots.evening * 10) / 10, Math.round(stats.timeSlots.night * 10) / 10];
             const timeColors = ["#f4a261", "#e9c46a", "#2a9d8f", "#264653"];
             
-            if (timeData.every(v => v === 0)) {
-                timeData[0] = 1;
-            }
+            if (timeData.every(v => v === 0)) timeData[0] = 1;
             
-            if (timeChart) {
-                timeChart.destroy();
-            }
+            if (timeChart) timeChart.destroy();
             const timeCtx = document.getElementById('timeChart').getContext('2d');
             timeChart = new Chart(timeCtx, {
                 type: 'bar',
-                data: {
-                    labels: timeLabels,
-                    datasets: [{
-                        label: '小时数',
-                        data: timeData,
-                        backgroundColor: timeColors,
-                        borderRadius: 8,
-                        barPercentage: 0.6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { callbacks: { label: function(context) { return `${context.raw} 小时`; } } }
-                    },
-                    scales: { y: { beginAtZero: true, title: { display: true, text: '小时', font: { size: 10 } } } }
-                }
+                data: { labels: timeLabels, datasets: [{ label: '小时数', data: timeData, backgroundColor: timeColors, borderRadius: 8, barPercentage: 0.6 }] },
+                options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(context) { return `${context.raw} 小时`; } } } }, scales: { y: { beginAtZero: true, title: { display: true, text: '小时', font: { size: 10 } } } } }
             });
             
-            // 更新统计摘要
             const summaryDiv = document.getElementById('statsSummary');
             const rangeText = currentChartRange === "week" ? "本周" : (currentChartRange === "month" ? "本月" : "全部");
-            summaryDiv.innerHTML = `
-                <div class="summary-card"><div class="summary-label">📊 统计周期</div><div class="summary-value">${rangeText}</div></div>
-                <div class="summary-card"><div class="summary-label">⏱️ 总时长</div><div class="summary-value">${Math.round(stats.totalHours * 10) / 10}</div><div class="summary-unit">小时</div></div>
-                <div class="summary-card"><div class="summary-label">📌 任务数量</div><div class="summary-value">${stats.eventCount}</div><div class="summary-unit">个</div></div>
-                <div class="summary-card"><div class="summary-label">💪 最活跃类别</div><div class="summary-value">${getTopCategory(stats.groupHours)}</div></div>
-            `;
-        }
-        
-        function getTopCategory(groupHours) {
-            const categories = [
-                { key: "green", name: "销售核心" },
-                { key: "yellow", name: "规划支持" },
-                { key: "orange", name: "招募拓展" },
-                { key: "blue", name: "学习会议" },
-                { key: "red", name: "生活平衡" }
-            ];
-            let maxKey = "green";
-            let maxVal = 0;
-            categories.forEach(c => {
-                if (groupHours[c.key] > maxVal) {
-                    maxVal = groupHours[c.key];
-                    maxKey = c.name;
-                }
-            });
-            return maxVal > 0 ? maxKey : "暂无";
+            const topCategory = (() => {
+                const categories = [{ key: "green", name: "销售核心" }, { key: "yellow", name: "规划支持" }, { key: "orange", name: "招募拓展" }, { key: "blue", name: "学习会议" }, { key: "red", name: "生活平衡" }];
+                let maxKey = "green", maxVal = 0;
+                categories.forEach(c => { if (stats.groupHours[c.key] > maxVal) { maxVal = stats.groupHours[c.key]; maxKey = c.name; } });
+                return maxVal > 0 ? maxKey : "暂无";
+            })();
+            summaryDiv.innerHTML = `<div class="summary-card"><div class="summary-label">📊 统计周期</div><div class="summary-value">${rangeText}</div></div><div class="summary-card"><div class="summary-label">⏱️ 总时长</div><div class="summary-value">${Math.round(stats.totalHours * 10) / 10}</div><div class="summary-unit">小时</div></div><div class="summary-card"><div class="summary-label">📌 任务数量</div><div class="summary-value">${stats.eventCount}</div><div class="summary-unit">个</div></div><div class="summary-card"><div class="summary-label">💪 最活跃类别</div><div class="summary-value">${topCategory}</div></div>`;
         }
         
         function loadTodos(){
@@ -1437,16 +1644,11 @@
         function isEventCoveringHour(event, hour) {
             let start = event.startHour;
             let end = event.endHour;
-            if (end <= start) {
-                return hour >= start || hour < end;
-            } else {
-                return hour >= start && hour < end;
-            }
+            if (end <= start) return hour >= start || hour < end;
+            else return hour >= start && hour < end;
         }
         
-        function getEventsForHour(weekday, hour){ 
-            return events.filter(e => e.weekOffset === viewOffset && e.weekday === weekday && isEventCoveringHour(e, hour));
-        }
+        function getEventsForHour(weekday, hour){ return events.filter(e => e.weekOffset === viewOffset && e.weekday === weekday && isEventCoveringHour(e, hour)); }
         
         function autoSaveEvents(){ localStorage.setItem('david_tung_events',JSON.stringify(events)); localStorage.setItem('david_tung_base',baseMonday.toISOString()); updateCharts(); }
         
@@ -1537,9 +1739,7 @@
             if(!title){ closeModal(); return; } 
             let startHour=parseInt(document.getElementById('startHourSelect').value); 
             let endHour=parseInt(document.getElementById('endHourSelect').value); 
-            if(endHour === startHour){ 
-                endHour = getNextHour(startHour);
-            }
+            if(endHour === startHour) endHour = getNextHour(startHour);
             let weekday=parseInt(document.getElementById('weekdaySelect').value); 
             let weekOffset=parseInt(document.getElementById('weekOffsetSelect').value); 
             let aid=parseInt(document.getElementById('activityId').value); 
@@ -1673,6 +1873,7 @@
         setupAutoSave();
         populateHourSelects();
         updateCharts();
+        loadGoals(); // 加载目标数据
         
         document.getElementById('quickAddBtn').addEventListener('click',()=>openModalForSlot(new Date().getDay(),9));
         document.getElementById('fabBtn').addEventListener('click',()=>openModalForSlot(new Date().getDay(),9));
