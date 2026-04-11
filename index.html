@@ -30,7 +30,6 @@
             transition: background 0.3s ease;
             position: relative;
         }
-        /* 主题装饰容器 */
         .theme-decoration {
             position: fixed;
             bottom: 0;
@@ -40,11 +39,6 @@
             z-index: 0;
             opacity: 0.15;
             transition: all 0.3s ease;
-        }
-        .theme-decoration svg {
-            width: 100%;
-            height: auto;
-            max-height: 200px;
         }
         .page-container { max-width: 1400px; margin: 0 auto; padding: 0 12px 80px 12px; position: relative; z-index: 1; }
         .page { display: none; animation: fadeIn 0.3s ease; }
@@ -99,6 +93,19 @@
             border-radius: 10px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
+        .calendar-icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 28px;
+            padding: 4px 8px;
+            border-radius: 40px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .calendar-icon-btn:active { transform: scale(0.95); background: rgba(255,140,66,0.1); }
         h1 {
             font-size: 26px;
             font-weight: 800;
@@ -148,6 +155,116 @@
         }
         .encouragement-section .encouragement-hint {
             color: #d4a373 !important;
+        }
+        
+        /* 日历模态框样式 */
+        .calendar-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        .calendar-modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .calendar-container {
+            background: white;
+            border-radius: 32px;
+            width: 90%;
+            max-width: 400px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .calendar-modal.active .calendar-container {
+            transform: scale(1);
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .calendar-header button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: #ff8c42;
+        }
+        .calendar-month-year {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d6a4f;
+        }
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .calendar-weekday {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ff8c42;
+            padding: 8px 0;
+        }
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: all 0.2s;
+            color: #1e3a2f;
+        }
+        .calendar-day:hover {
+            background: rgba(255,140,66,0.2);
+        }
+        .calendar-day.today {
+            background: #ff8c42;
+            color: white;
+        }
+        .calendar-day.selected {
+            background: #2d6a4f;
+            color: white;
+        }
+        .calendar-day.other-month {
+            color: #c8d0c0;
+        }
+        .calendar-close {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background: #eef3ea;
+            border: none;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4d7a64;
+            cursor: pointer;
         }
         
         .progress-bar-bg { background: #e0f0e4; border-radius: 40px; height: 10px; overflow: hidden; margin: 10px 0; transition: background 0.3s; }
@@ -239,14 +356,7 @@
         }
         .theme-btn:hover { transform: scale(1.15); }
         .theme-btn.active { border-color: #ff8c42; box-shadow: 0 0 0 2px #ff8c42; transform: scale(1.05); }
-        .theme-btn svg {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0.6;
-        }
+        .theme-btn svg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0.6; }
         
         .performance-header {
             text-align: center;
@@ -283,8 +393,6 @@
 <body>
 
 <div id="toast" class="toast-message"></div>
-
-<!-- 主题装饰层 -->
 <div id="themeDecoration" class="theme-decoration"></div>
 
 <div class="page-container" id="appContainer">
@@ -297,10 +405,13 @@
                     <canvas id="dtIconCanvas" class="title-icon" width="40" height="40" style="width:40px; height:40px; border-radius:10px;"></canvas>
                     <h1>时间管理大师 2026🔥</h1>
                 </div>
-                <div class="header-badges">
-                    <span class="energy-badge">🔥 热血每一天</span>
-                    <span class="energy-badge">📅 500+语录</span>
-                    <span class="energy-badge">✅ 今日待办</span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <button class="calendar-icon-btn" id="calendarIconBtn">📅</button>
+                    <div class="header-badges">
+                        <span class="energy-badge">🔥 热血每一天</span>
+                        <span class="energy-badge" id="quoteCountBadge">📅 500+语录</span>
+                        <span class="energy-badge">✅ 今日待办</span>
+                    </div>
                 </div>
             </div>
             <div class="sub">🏆 每一个冠军都曾是挑战者 | 💪 你的时间，你的传奇</div>
@@ -308,6 +419,9 @@
                 <button class="btn btn-primary" id="quickAddBtn">⚡ + 快速添加</button>
                 <button class="btn" id="exportBtn">📤 导出备份</button>
                 <button class="btn" id="importBtn">📂 导入备份</button>
+                <button class="btn btn-primary" id="syncIcalBtn">📅 同步当前周</button>
+                <button class="btn btn-export-all" id="exportAllCalendarBtn">📆 导出全部任务</button>
+                <button class="btn btn-google" id="syncGoogleBtn">📧 导出 Google 日历</button>
                 <button class="btn btn-primary" id="exportWeeklyReportBtn" style="background: linear-gradient(135deg, #e67e22, #f39c12);">📄 导出周报 PDF</button>
             </div>
         </div>
@@ -451,6 +565,23 @@
     </div>
 </div>
 
+<!-- 日历模态框 -->
+<div id="calendarModal" class="calendar-modal">
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button id="prevMonthBtn">◀</button>
+            <span id="calendarMonthYear" class="calendar-month-year"></span>
+            <button id="nextMonthBtn">▶</button>
+        </div>
+        <div class="calendar-weekdays">
+            <div class="calendar-weekday">日</div><div class="calendar-weekday">一</div><div class="calendar-weekday">二</div>
+            <div class="calendar-weekday">三</div><div class="calendar-weekday">四</div><div class="calendar-weekday">五</div><div class="calendar-weekday">六</div>
+        </div>
+        <div id="calendarDays" class="calendar-days"></div>
+        <button class="calendar-close" id="closeCalendarBtn">关闭</button>
+    </div>
+</div>
+
 <div class="bottom-nav">
     <button class="nav-item active" data-page="home"><span class="nav-icon">🏠</span><span class="nav-label">主页</span></button>
     <button class="nav-item" data-page="performance"><span class="nav-icon">🎯</span><span class="nav-label">业绩追踪</span></button>
@@ -482,6 +613,67 @@
     
     function showToast(msg, dur=1500) { let t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), dur); }
     
+    // ========== 日历功能 ==========
+    let currentCalendarDate = new Date();
+    let selectedCalendarDate = null;
+    
+    function renderCalendar() {
+        const year = currentCalendarDate.getFullYear();
+        const month = currentCalendarDate.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const startDayOfWeek = firstDay.getDay();
+        const daysInMonth = lastDay.getDate();
+        const prevMonthLastDay = new Date(year, month, 0).getDate();
+        
+        document.getElementById('calendarMonthYear').innerText = `${year}年 ${month + 1}月`;
+        
+        const daysContainer = document.getElementById('calendarDays');
+        daysContainer.innerHTML = '';
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        for (let i = startDayOfWeek - 1; i >= 0; i--) {
+            const day = prevMonthLastDay - i;
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'calendar-day other-month';
+            dayDiv.innerText = day;
+            daysContainer.appendChild(dayDiv);
+        }
+        
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'calendar-day';
+            dayDiv.innerText = day;
+            const currentDate = new Date(year, month, day);
+            currentDate.setHours(0, 0, 0, 0);
+            if (currentDate.getTime() === today.getTime()) dayDiv.classList.add('today');
+            if (selectedCalendarDate && currentDate.getTime() === selectedCalendarDate.getTime()) dayDiv.classList.add('selected');
+            dayDiv.addEventListener('click', (function(date) { return function() { selectedCalendarDate = date; renderCalendar(); showToast(`📅 已选择 ${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`, 1500); }; })(currentDate));
+            daysContainer.appendChild(dayDiv);
+        }
+        
+        const totalCells = 42;
+        const remainingCells = totalCells - (startDayOfWeek + daysInMonth);
+        for (let day = 1; day <= remainingCells; day++) {
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'calendar-day other-month';
+            dayDiv.innerText = day;
+            daysContainer.appendChild(dayDiv);
+        }
+    }
+    
+    function openCalendar() { selectedCalendarDate = null; currentCalendarDate = new Date(); renderCalendar(); document.getElementById('calendarModal').classList.add('active'); }
+    function closeCalendar() { document.getElementById('calendarModal').classList.remove('active'); }
+    function prevMonth() { currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1); renderCalendar(); }
+    function nextMonth() { currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1); renderCalendar(); }
+    
+    document.getElementById('calendarIconBtn')?.addEventListener('click', openCalendar);
+    document.getElementById('closeCalendarBtn')?.addEventListener('click', closeCalendar);
+    document.getElementById('prevMonthBtn')?.addEventListener('click', prevMonth);
+    document.getElementById('nextMonthBtn')?.addEventListener('click', nextMonth);
+    
     // ========== 主页目标追踪 ==========
     function loadGoals() {
         let gspc = localStorage.getItem('david_tung_gspc') || 0;
@@ -497,6 +689,71 @@
     }
     document.getElementById('updateGspcBtn')?.addEventListener('click', () => { let val = parseInt(document.getElementById('gspcInput').value) || 0; localStorage.setItem('david_tung_gspc', val); loadGoals(); showToast(`✅ GSPC 已更新为 ${val.toLocaleString()}`); });
     document.getElementById('updateRecruitBtn')?.addEventListener('click', () => { let val = parseInt(document.getElementById('recruitInput').value) || 0; localStorage.setItem('david_tung_recruit', val); loadGoals(); showToast(`✅ 招聘人数已更新为 ${val}`); });
+    
+    // ========== 日历同步功能 ==========
+    function formatDateForICS(date, hour, minute) {
+        const pad = (n) => n.toString().padStart(2, '0');
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        return `${year}${pad(month)}${pad(day)}T${pad(hour)}${pad(minute)}00`;
+    }
+    
+    function syncToiOSCalendar() {
+        const currentEvents = events.filter(e => e.weekOffset === viewOffset);
+        if (!currentEvents.length) { showToast("📅 当前周没有任务可同步", 1500); return; }
+        let icsContent = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//David Tung Time Manager//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:David Tung 时间管理大师","X-WR-TIMEZONE:Asia/Kuala_Lumpur"];
+        currentEvents.forEach(ev => {
+            const act = ACTIVITIES.find(a => a.id === ev.activityId) || ACTIVITIES[0];
+            const eventDate = getActualEventDate(ev);
+            const dtstart = formatDateForICS(eventDate, ev.startHour, 0);
+            const dtend = formatDateForICS(eventDate, ev.endHour, 0);
+            icsContent.push("BEGIN:VEVENT",`UID:${ev.id}@davidtung.com`,`DTSTAMP:${formatDateForICS(new Date(), new Date().getHours(), new Date().getMinutes())}`,`DTSTART:${dtstart}`,`DTEND:${dtend}`,`SUMMARY:${act.icon} ${ev.title}`,`DESCRIPTION:活动类型: ${act.name}`,"END:VEVENT");
+        });
+        icsContent.push("END:VCALENDAR");
+        const blob = new Blob([icsContent.join("\r\n")], { type: 'text/calendar' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `david_tung_week_${new Date().toISOString().slice(0,10)}.ics`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast(`✅ 已导出当前周 ${currentEvents.length} 个任务`, 2500);
+    }
+    
+    function exportAllToCalendar() {
+        if (events.length === 0) { showToast("📅 没有任何任务可导出", 1500); return; }
+        const sortedEvents = [...events].sort((a, b) => {
+            const dateA = getActualEventDate(a);
+            const dateB = getActualEventDate(b);
+            return dateA - dateB;
+        });
+        let icsContent = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//David Tung Time Manager//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:David Tung 全部任务","X-WR-TIMEZONE:Asia/Kuala_Lumpur"];
+        sortedEvents.forEach(ev => {
+            const act = ACTIVITIES.find(a => a.id === ev.activityId) || ACTIVITIES[0];
+            const eventDate = getActualEventDate(ev);
+            const dtstart = formatDateForICS(eventDate, ev.startHour, 0);
+            const dtend = formatDateForICS(eventDate, ev.endHour, 0);
+            const dateStr = `${eventDate.getFullYear()}/${eventDate.getMonth()+1}/${eventDate.getDate()}`;
+            icsContent.push("BEGIN:VEVENT",`UID:${ev.id}@davidtung.com`,`DTSTAMP:${formatDateForICS(new Date(), new Date().getHours(), new Date().getMinutes())}`,`DTSTART:${dtstart}`,`DTEND:${dtend}`,`SUMMARY:${act.icon} ${ev.title}`,`DESCRIPTION:活动类型: ${act.name} | 日期: ${dateStr}`,"END:VEVENT");
+        });
+        icsContent.push("END:VCALENDAR");
+        const blob = new Blob([icsContent.join("\r\n")], { type: 'text/calendar' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `david_tung_all_tasks_${new Date().toISOString().slice(0,10)}.ics`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast(`✅ 已导出全部 ${events.length} 个任务`, 3000);
+    }
+    function syncToGoogleCalendar(){ syncToiOSCalendar(); }
+    
+    document.getElementById('syncIcalBtn')?.addEventListener('click', syncToiOSCalendar);
+    document.getElementById('exportAllCalendarBtn')?.addEventListener('click', exportAllToCalendar);
+    document.getElementById('syncGoogleBtn')?.addEventListener('click', syncToGoogleCalendar);
     
     // ========== 导出周报 PDF 功能 ==========
     async function exportWeeklyReport() {
@@ -527,58 +784,37 @@
             <div class="report-date">📅 报告周期：${weekStart.getFullYear()}年${weekStart.getMonth()+1}月${weekStart.getDate()}日 - ${weekEnd.getFullYear()}年${weekEnd.getMonth()+1}月${weekEnd.getDate()}日</div>
             <div class="report-date">📝 生成时间：${new Date().toLocaleString()}</div>
             <div class="encouragement"><strong>🏆 本周激励语：</strong><br>“${document.getElementById('dailyEncouragement')?.innerText || '今天也要闪闪发光！'}”</div>
-            
             <h2>🎯 年度目标进度</h2>
             <table><thead><tr><th>目标</th><th>当前进度</th><th>目标值</th><th>完成率</th></tr></thead>
-            <tbody>
-                <tr><td>💰 GSPC 业绩</td><td>${(parseInt(localStorage.getItem('david_tung_gspc')||0)).toLocaleString()}</td><td>450,000</td><td>${Math.min(100, Math.round((parseInt(localStorage.getItem('david_tung_gspc')||0)/450000)*100))}%</td> </tr
-                <tr><td>👥 团队招聘</td><td>${parseInt(localStorage.getItem('david_tung_recruit')||0)}</td><td>10</td><td>${Math.min(100, Math.round((parseInt(localStorage.getItem('david_tung_recruit')||0)/10)*100))}%</td> </tr
-            </tbody> </table>
-            
+            <tbody><tr><td>💰 GSPC 业绩</td><td>${(parseInt(localStorage.getItem('david_tung_gspc')||0)).toLocaleString()}</td><td>450,000</td><td>${Math.min(100, Math.round((parseInt(localStorage.getItem('david_tung_gspc')||0)/450000)*100))}%</td></tr>
+            <tr><td>👥 团队招聘</td><td>${parseInt(localStorage.getItem('david_tung_recruit')||0)}</td><td>10</td><td>${Math.min(100, Math.round((parseInt(localStorage.getItem('david_tung_recruit')||0)/10)*100))}%</td></tr></tbody></table>
             <h2>⏰ 本周时间分配统计</h2>
-            <table><thead> <tr><th>活动类别</th><th>总时长（小时）</th> </tr></thead>
-            <tbody>
-                <tr><td>💰 销售核心</td><td>${Math.round(categoryHours.green * 10) / 10}</td> </tr
-                <tr><td>📋 规划支持</td><td>${Math.round(categoryHours.yellow * 10) / 10}</td> </tr
-                <tr><td>👥 招募拓展</td><td>${Math.round(categoryHours.orange * 10) / 10}</td> </tr
-                <tr><td>📚 学习会议</td><td>${Math.round(categoryHours.blue * 10) / 10}</td> </tr
-                <tr><td>🌿 生活平衡</td><td>${Math.round(categoryHours.red * 10) / 10}</td> </tr
-                <tr style="background:#f0f0f0;"><td><strong>总计</strong></td><td><strong>${Math.round((categoryHours.green+categoryHours.yellow+categoryHours.orange+categoryHours.blue+categoryHours.red) * 10) / 10}</strong></td> </tr
-            </tbody> </table>
-            
+            <table><thead><tr><th>活动类别</th><th>总时长（小时）</th></tr></thead>
+            <tbody><tr><td>💰 销售核心</td><td>${Math.round(categoryHours.green * 10) / 10}</td></tr>
+            <tr><td>📋 规划支持</td><td>${Math.round(categoryHours.yellow * 10) / 10}</td></tr>
+            <tr><td>👥 招募拓展</td><td>${Math.round(categoryHours.orange * 10) / 10}</td></tr>
+            <tr><td>📚 学习会议</td><td>${Math.round(categoryHours.blue * 10) / 10}</td></tr>
+            <tr><td>🌿 生活平衡</td><td>${Math.round(categoryHours.red * 10) / 10}</td></tr>
+            <tr style="background:#f0f0f0;"><td><strong>总计</strong></td><td><strong>${Math.round((categoryHours.green+categoryHours.yellow+categoryHours.orange+categoryHours.blue+categoryHours.red) * 10) / 10}</strong></td></tr></tbody></table>
             <h2>📌 本周任务统计</h2>
-            <table><thead> <tr><th>项目</th><th>数量</th> </tr></thead>
-            <tbody>
-                <tr><td>📋 本周总任务数</td><td>${weekEvents.length}</td> </tr
-                <tr><td>✅ 已完成待办事项</td><td>${completedTodos.length}</td> </tr
-                <tr><td>⏳ 待完成事项</td><td>${pendingTodos.length}</td> </tr
-            </tbody> </table>
-            
+            <table><thead><tr><th>项目</th><th>数量</th></tr></thead>
+            <tbody><tr><td>📋 本周总任务数</td><td>${weekEvents.length}</td></tr>
+            <tr><td>✅ 已完成待办事项</td><td>${completedTodos.length}</td></tr>
+            <tr><td>⏳ 待完成事项</td><td>${pendingTodos.length}</td></tr></tbody></table>
             <h2>✅ 待办事项清单</h2>
-            <table><thead> <tr><th>状态</th><th>事项内容</th> </tr></thead>
-            <tbody>${todoItemsList.map(t => `<tr><td>${t.completed ? '✅ 已完成' : '⏳ 待完成'}</td><td>${escapeHtml(t.text)}</td> </tr`).join('')}${todoItemsList.length === 0 ? '<tr><td colspan="2" style="text-align:center;">暂无待办事项</td> </tr' : ''}</tbody> </table>
-            
+            <table><thead><tr><th>状态</th><th>事项内容</th></tr></thead>
+            <tbody>${todoItemsList.map(t => `<tr><td>${t.completed ? '✅ 已完成' : '⏳ 待完成'}</td><td>${escapeHtml(t.text)}</td></tr>`).join('')}${todoItemsList.length === 0 ? '<tr><td colspan="2" style="text-align:center;">暂无待办事项</td></tr>' : ''}</tbody></table>
             <h2>📝 本周反思与感恩记录</h2>
-            <table><thead> <tr><th>日期</th><th>📝 检讨 / 反思</th><th>🙏 感恩 / 鼓励</th> </tr></thead>
-            <tbody>${weeklyActivities.map(day => `<tr><td>${day.date}</td><td>${day.reflection.substring(0, 100)}${day.reflection.length > 100 ? '...' : ''}</td><td>${day.gratitude.substring(0, 100)}${day.gratitude.length > 100 ? '...' : ''}</td> </tr`).join('')}</tbody> </table>
-            
+            <table><thead><tr><th>日期</th><th>📝 检讨 / 反思</th><th>🙏 感恩 / 鼓励</th></tr></thead>
+            <tbody>${weeklyActivities.map(day => `<tr><td>${day.date}</td><td>${day.reflection.substring(0, 100)}${day.reflection.length > 100 ? '...' : ''}</td><td>${day.gratitude.substring(0, 100)}${day.gratitude.length > 100 ? '...' : ''}</td></tr>`).join('')}</tbody></table>
             <h2>💭 今日反思详情</h2>
-            <table><thead> <tr><th>项目</th><th>内容</th> </tr></thead>
-            <tbody>
-                <tr><td>📝 今日检讨 / 反思</td><td>${reflectionText.substring(0, 500)}${reflectionText.length > 500 ? '...' : ''}</td> </tr
-                <tr><td>🙏 今日感恩 / 鼓励自己</td><td>${gratitudeText.substring(0, 500)}${gratitudeText.length > 500 ? '...' : ''}</td> </tr
-            </tbody> </table>
-            
+            <table><thead><tr><th>项目</th><th>内容</th></tr></thead>
+            <tbody><tr><td>📝 今日检讨 / 反思</td><td>${reflectionText.substring(0, 500)}${reflectionText.length > 500 ? '...' : ''}</td></tr>
+            <tr><td>🙏 今日感恩 / 鼓励自己</td><td>${gratitudeText.substring(0, 500)}${gratitudeText.length > 500 ? '...' : ''}</td></tr></tbody></table>
             <h2>📋 主管审核栏</h2>
-            <table><tbody>
-                <tr><td style="height: 60px;">审核意见：<br><br><br></td> </tr
-                <tr><td>审核人签名：____________________ &nbsp;&nbsp;&nbsp;&nbsp; 日期：________</td> </tr
-            </tbody> </table>
-            
-            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #8aa57a; font-size: 11px;">
-                David Tung 时间管理大师 - 成功吸引成功，我是超级卓越主管！<br>
-                本报告由系统自动生成，数据来源于日常记录。
-            </div>
+            <table><tbody><tr><td style="height: 60px;">审核意见：<br><br><br></td></tr>
+            <tr><td>审核人签名：____________________ &nbsp;&nbsp;&nbsp;&nbsp; 日期：________</td></tr></tbody></table>
+            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #8aa57a; font-size: 11px;">David Tung 时间管理大师 - 成功吸引成功，我是超级卓越主管！<br>本报告由系统自动生成，数据来源于日常记录。</div>
         </div>`;
         
         const tempDiv = document.createElement('div');
@@ -587,112 +823,53 @@
         tempDiv.style.top = '-9999px';
         tempDiv.innerHTML = reportHtml;
         document.body.appendChild(tempDiv);
-        
-        const opt = {
-            margin: [0.5, 0.5, 0.5, 0.5],
-            filename: `DavidTung_周报_${weekStart.getFullYear()}_${weekStart.getMonth()+1}_${weekStart.getDate()}.pdf`,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-        };
-        
-        try {
-            await html2pdf().set(opt).from(tempDiv).save();
-            showToast("✅ 周报导出成功！", 2000);
-        } catch (error) {
-            console.error("PDF生成错误:", error);
-            showToast("❌ 周报导出失败，请重试", 2000);
-        } finally {
-            document.body.removeChild(tempDiv);
-        }
+        const opt = { margin: [0.5, 0.5, 0.5, 0.5], filename: `DavidTung_周报_${weekStart.getFullYear()}_${weekStart.getMonth()+1}_${weekStart.getDate()}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } };
+        try { await html2pdf().set(opt).from(tempDiv).save(); showToast("✅ 周报导出成功！", 2000); } catch (error) { console.error(error); showToast("❌ 周报导出失败，请重试", 2000); } finally { document.body.removeChild(tempDiv); }
     }
     document.getElementById('exportWeeklyReportBtn')?.addEventListener('click', exportWeeklyReport);
     
-    // ========== 500条激励语录 ==========
-    const ENCOURAGEMENTS = [
-        "🔥 今天是你余生的第一天，全力以赴！",
-        "🏆 每一个冠军都曾是一个不服输的挑战者！",
-        "🌱 你的努力，时间会看见。继续前进！",
-        "⚡ 燃烧热情，创造属于你的传奇！",
-        "💎 你的时间花在哪里，成就就在哪里！",
-        "🌈 困难是成长的阶梯，跨过去就是新高度！",
-        "⭐ 你已经做得很好了，继续坚持！",
-        "🌻 保持积极，好事正在发生！",
-        "💪 你是自己人生的CEO，今天也要高效管理！",
-        "✨ 相信相信的力量，奇迹正在发生！",
-        "🎯 专注当下，小事成就大事！",
-        "🚀 勇敢追梦，未来由你创造！",
-        "💡 每一个清晨都是新的开始，把握今天！",
-        "🏅 成功不是偶然，是每天坚持的累积！",
-        "🌿 慢慢来，比较快。稳扎稳打才能走得更远！",
-        "🎨 用热情描绘今天，用行动书写未来！",
-        "📚 学习是终身的事业，今天也要进步一点点！",
-        "🤝 人脉是金矿，用心经营每一段关系！",
-        "💰 每一通电话都是机会，每一个拒绝都是成长！",
-        "🏃 身体是革命的本钱，健康才能走得更远！",
-        "🧘 静下心来，聆听内心的声音！",
-        "🍃 像树一样，向下扎根，向上生长！",
-        "⭐ 你比想象中更优秀，相信自己！",
-        "💦 今天流下的汗，是明天成功的雨！",
-        "🎯 瞄准目标，一击即中！",
-        "🏔️ 翻过这座山，后面是更美的风景！",
-        "🔥 你的能量超乎你想象！",
-        "💎 每一天都是新的机会，抓住它！",
-        "🌟 做最好的自己，今天就是起点！",
-        "📈 业绩不会说谎，行动决定结果！",
-        "🤝 先建立信任，再谈成交！",
-        "💬 多说一句关怀，多一个成交机会！",
-        "🎯 SPIN销售法：情况、问题、影响、需求回报！",
-        "📞 每一个拨出的电话，都是一个机会！",
-        "💪 拒绝是成交的开始，坚持就有结果！",
-        "🏆 顶尖销售员都是被拒绝喂大的！",
-        "🔥 今天多打一个电话，明天多一个客户！",
-        "💎 客户买的不是产品，是解决方案！",
-        "🌟 成交是服务的开始，不是结束！",
-        "📋 每天计划好，效率翻倍！",
-        "⏰ 时间花在哪里，成就就在哪里！",
-        "🎯 目标写在纸上，刻在心里！",
-        "🏃 行动是治愈恐惧的良药！",
-        "💪 不是因为有希望才坚持，而是坚持了才有希望！",
-        "🔥 成功者找方法，失败者找借口！",
-        "🌅 早起的鸟儿有虫吃，早起的人有业绩！",
-        "📞 电话一响，黄金万两！",
-        "🤝 见面三分情，多见面多成交！",
-        "💎 专业 + 真诚 = 成功！",
-        "🏆 今天的努力，明天的实力！"
+    // ========== 500条不重复激励语录 ==========
+    const coreQuotes = [
+        "🔥 今天是你余生的第一天，全力以赴！","🏆 每一个冠军都曾是一个不服输的挑战者！","🌱 你的努力，时间会看见。继续前进！",
+        "⚡ 燃烧热情，创造属于你的传奇！","💎 你的时间花在哪里，成就就在哪里！","🌈 困难是成长的阶梯，跨过去就是新高度！",
+        "⭐ 你已经做得很好了，继续坚持！","🌻 保持积极，好事正在发生！","💪 你是自己人生的CEO，今天也要高效管理！",
+        "✨ 相信相信的力量，奇迹正在发生！","🎯 专注当下，小事成就大事！","🚀 勇敢追梦，未来由你创造！",
+        "💡 每一个清晨都是新的开始，把握今天！","🏅 成功不是偶然，是每天坚持的累积！","🌿 慢慢来，比较快。稳扎稳打才能走得更远！",
+        "🎨 用热情描绘今天，用行动书写未来！","📚 学习是终身的事业，今天也要进步一点点！","🤝 人脉是金矿，用心经营每一段关系！",
+        "💰 每一通电话都是机会，每一个拒绝都是成长！","🏃 身体是革命的本钱，健康才能走得更远！","🧘 静下心来，聆听内心的声音！",
+        "🍃 像树一样，向下扎根，向上生长！","⭐ 你比想象中更优秀，相信自己！","💦 今天流下的汗，是明天成功的雨！",
+        "🎯 瞄准目标，一击即中！","🏔️ 翻过这座山，后面是更美的风景！","🔥 你的能量超乎你想象！",
+        "💎 每一天都是新的机会，抓住它！","🌟 做最好的自己，今天就是起点！","📈 业绩不会说谎，行动决定结果！",
+        "🤝 先建立信任，再谈成交！","💬 多说一句关怀，多一个成交机会！","🎯 SPIN销售法：情况、问题、影响、需求回报！",
+        "📞 每一个拨出的电话，都是一个机会！","💪 拒绝是成交的开始，坚持就有结果！","🏆 顶尖销售员都是被拒绝喂大的！",
+        "🔥 今天多打一个电话，明天多一个客户！","💎 客户买的不是产品，是解决方案！","🌟 成交是服务的开始，不是结束！",
+        "📋 每天计划好，效率翻倍！","⏰ 时间花在哪里，成就就在哪里！","🎯 目标写在纸上，刻在心里！",
+        "🏃 行动是治愈恐惧的良药！","💪 不是因为有希望才坚持，而是坚持了才有希望！","🔥 成功者找方法，失败者找借口！",
+        "🌅 早起的鸟儿有虫吃，早起的人有业绩！","📞 电话一响，黄金万两！","🤝 见面三分情，多见面多成交！",
+        "💎 专业 + 真诚 = 成功！","🏆 今天的努力，明天的实力！","⚡ 全力以赴，不留遗憾！"
     ];
     
-    // 扩充到500条
-    const shortTemplates = [
-        "⚡ 努力拼搏，今天就要出彩！",
-        "🏆 冠军心态，永不言败！",
-        "🌱 每天进步一点点，终将抵达远方！",
-        "🔥 热情不减，梦想不远！",
-        "💎 时间宝贵，别浪费在犹豫上！",
-        "🎯 锁定目标，全力以赴！",
-        "🚀 行动起来，奇迹就在下一秒！",
-        "💪 咬牙坚持，胜利就在前方！",
-        "🌟 相信过程，结果自然来！",
-        "📈 业绩为王，行动为先！"
+    let ENCOURAGEMENTS = [...coreQuotes];
+    const actionTemplates = [
+        "💪 第{N}次行动：今天再坚持一下！","🔥 第{N}天冲刺：离目标更近一步！","⚡ 第{N}次努力：付出必有回报！",
+        "🎯 第{N}次专注：聚焦目标，一击即中！","💎 第{N}次突破：超越昨天的自己！","🌟 第{N}次成长：每天进步一点点！",
+        "🏆 第{N}次挑战：勇者无畏！","📈 第{N}次业绩：今天的努力，明天的成果！","🤝 第{N}次连接：多一个朋友，多一条路！"
     ];
-    
+    let counter = ENCOURAGEMENTS.length + 1;
     while (ENCOURAGEMENTS.length < 500) {
-        for (let t of shortTemplates) {
+        for (let template of actionTemplates) {
             if (ENCOURAGEMENTS.length >= 500) break;
-            ENCOURAGEMENTS.push(t);
+            ENCOURAGEMENTS.push(template.replace('{N}', counter));
+            counter++;
         }
     }
-    
     for (let i = ENCOURAGEMENTS.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [ENCOURAGEMENTS[i], ENCOURAGEMENTS[j]] = [ENCOURAGEMENTS[j], ENCOURAGEMENTS[i]];
     }
+    document.getElementById('quoteCountBadge').innerHTML = `📅 ${ENCOURAGEMENTS.length}+语录`;
     
-    function getRandomEncouragement(){ 
-        const randomIndex = Math.floor(Math.random() * ENCOURAGEMENTS.length);
-        return ENCOURAGEMENTS[randomIndex] + " ✨";
-    }
-    
+    function getRandomEncouragement(){ return ENCOURAGEMENTS[Math.floor(Math.random() * ENCOURAGEMENTS.length)]; }
     function updateDailyEncouragement(){
         let key = new Date().toISOString().slice(0,10);
         let stored = localStorage.getItem('david_tung_enc');
@@ -723,9 +900,7 @@
     
     let events=[], allDailyData={}, baseMonday=null, viewOffset=0, editId=null, todoItems=[];
     let categoryChart=null, timeChart=null, currentChartRange="week";
-    window.events = events;
-    window.allDailyData = allDailyData;
-    window.todoItems = todoItems;
+    window.events = events; window.allDailyData = allDailyData; window.todoItems = todoItems;
     
     function getMonday(d){ let nd=new Date(d); let day=nd.getDay(); let diff=day===0?6:day-1; nd.setDate(nd.getDate()-diff); nd.setHours(0,0,0,0); return nd; }
     function getViewMonday(){ let m=new Date(baseMonday); m.setDate(baseMonday.getDate()+viewOffset*7); return m; }
@@ -1097,13 +1272,13 @@
         }
     }
     
-    // ========== 主题装饰 SVG 生成 ==========
+    // ========== 主题装饰 SVG ==========
     function getThemeDecoration(themeKey) {
         const decorations = {
-            default: `<svg viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"><path d="M0,200 L800,200 L800,180 Q600,200 400,180 Q200,160 0,180 Z" fill="#2d6a4f" opacity="0.3"/><circle cx="100" cy="170" r="15" fill="#ff8c42" opacity="0.2"/><circle cx="250" cy="185" r="10" fill="#ff8c42" opacity="0.15"/><circle cx="550" cy="175" r="12" fill="#ff8c42" opacity="0.2"/><path d="M150,190 L170,160 L190,190 Z" fill="#ff8c42" opacity="0.15"/><path d="M600,185 L620,155 L640,185 Z" fill="#ff8c42" opacity="0.15"/></svg>`,
+            default: `<svg viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"><path d="M0,200 L800,200 L800,180 Q600,200 400,180 Q200,160 0,180 Z" fill="#2d6a4f" opacity="0.3"/><circle cx="100" cy="170" r="15" fill="#ff8c42" opacity="0.2"/><circle cx="250" cy="185" r="10" fill="#ff8c42" opacity="0.15"/><circle cx="550" cy="175" r="12" fill="#ff8c42" opacity="0.2"/></svg>`,
             ocean: `<svg viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"><path d="M0,200 L800,200 L800,170 Q600,200 400,170 Q200,140 0,170 Z" fill="#1a5276" opacity="0.3"/><path d="M0,200 L800,200 L800,190 Q600,210 400,190 Q200,170 0,190 Z" fill="#48c9b0" opacity="0.2"/><circle cx="120" cy="180" r="8" fill="#48c9b0" opacity="0.3"/><circle cx="680" cy="175" r="10" fill="#48c9b0" opacity="0.25"/></svg>`,
             sunset: `<svg viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"><circle cx="400" cy="160" r="30" fill="#f4d03f" opacity="0.15"/><path d="M300,190 L400,150 L500,190 Z" fill="#c44536" opacity="0.2"/><path d="M0,200 L200,180 L400,195 L600,175 L800,190 L800,200 Z" fill="#f4d03f" opacity="0.15"/></svg>`,
-            purple: `<svg viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"><path d="M0,200 L800,200 L800,185 Q600,205 400,185 Q200,165 0,185 Z" fill="#6c3483" opacity="0.25"/><circle cx="200" cy="175" r="12" fill="#f7dc6f" opacity="0.2"/><circle cx="600" cy="180" r="8" fill="#f7dc6f" opacity="0.2"/><path d="M350,195 L400,170 L450,195 Z" fill="#f7dc6f" opacity="0.15"/></svg>`,
+            purple: `<svg viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"><path d="M0,200 L800,200 L800,185 Q600,205 400,185 Q200,165 0,185 Z" fill="#6c3483" opacity="0.25"/><circle cx="200" cy="175" r="12" fill="#f7dc6f" opacity="0.2"/><circle cx="600" cy="180" r="8" fill="#f7dc6f" opacity="0.2"/></svg>`,
             midnight: `<svg viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"><circle cx="200" cy="170" r="5" fill="#e94560" opacity="0.3"/><circle cx="400" cy="160" r="8" fill="#e94560" opacity="0.25"/><circle cx="600" cy="175" r="6" fill="#e94560" opacity="0.3"/><path d="M0,200 L800,200 L800,195 Q400,215 0,195 Z" fill="#e94560" opacity="0.15"/></svg>`,
             cherry: `<svg viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"><circle cx="150" cy="180" r="10" fill="#f8c291" opacity="0.25"/><circle cx="300" cy="170" r="8" fill="#f8c291" opacity="0.2"/><circle cx="500" cy="185" r="12" fill="#f8c291" opacity="0.2"/><circle cx="650" cy="175" r="6" fill="#f8c291" opacity="0.25"/><path d="M200,195 Q250,175 300,195" stroke="#c44569" stroke-width="2" fill="none" opacity="0.2"/></svg>`,
             sunny: `<svg viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"><circle cx="400" cy="170" r="25" fill="#e67e22" opacity="0.15"/><line x1="400" y1="140" x2="400" y2="125" stroke="#e67e22" stroke-width="2" opacity="0.2"/><line x1="430" y1="150" x2="445" y2="140" stroke="#e67e22" stroke-width="2" opacity="0.2"/><line x1="370" y1="150" x2="355" y2="140" stroke="#e67e22" stroke-width="2" opacity="0.2"/></svg>`,
@@ -1118,12 +1293,10 @@
     
     function updateThemeDecoration(themeKey) {
         const container = document.getElementById('themeDecoration');
-        if (container) {
-            container.innerHTML = getThemeDecoration(themeKey);
-        }
+        if (container) container.innerHTML = getThemeDecoration(themeKey);
     }
     
-    // ========== 主题颜色切换（12种完整版） ==========
+    // ========== 主题颜色切换 ==========
     const themeDefinitions = {
         default: { name: "经典森林", bg: "#2d6a4f", accent: "#ff8c42", text: "#ffffff", headerBg: "rgba(255,255,250,0.95)", border: "#ff8c42" },
         ocean: { name: "深海蓝", bg: "#1a5276", accent: "#48c9b0", text: "#ffffff", headerBg: "rgba(255,255,250,0.95)", border: "#48c9b0" },
@@ -1154,30 +1327,18 @@
     function applyTheme(themeKey) {
         const theme = themeDefinitions[themeKey];
         if (!theme) return;
-        
-        // 更新小图标
         updateSmallIcon(theme);
-        
-        // 更新底部装饰
         updateThemeDecoration(themeKey);
-        
-        // 更新背景
         document.body.style.background = `linear-gradient(145deg, ${theme.bg}20, ${theme.accent}20)`;
-        
-        // 更新卡片
         document.querySelectorAll('.card:not(.goal-card-fixed):not(.encouragement-section)').forEach(card => {
             card.style.background = theme.headerBg === "#1a1a2e" ? "#2d2d44" : "white";
             card.style.color = theme.text;
             card.style.borderColor = `${theme.bg}40`;
         });
-        
-        // 确保激励语录区域不受影响
         document.querySelectorAll('.encouragement-section').forEach(section => {
             section.style.background = "rgba(255,245,220,0.7)";
             section.style.color = "#b85c1a";
         });
-        
-        // 更新统计元素
         document.querySelectorAll('.stat-item').forEach(item => item.style.background = `${theme.bg}10`);
         document.querySelectorAll('.progress-bar-bg').forEach(bar => bar.style.background = `${theme.bg}30`);
         document.querySelectorAll('.progress-fill').forEach(fill => fill.style.background = `linear-gradient(90deg, ${theme.bg}, ${theme.accent})`);
@@ -1199,7 +1360,6 @@
         document.querySelectorAll('.header .energy-badge').forEach(badge => badge.style.color = theme.accent);
         document.querySelectorAll('.nav-item.active .nav-label').forEach(label => label.style.color = theme.accent);
         document.querySelectorAll('.goal-value').forEach(gv => gv.style.color = theme.accent);
-        
         localStorage.setItem('app_theme', themeKey);
         document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelector(`.theme-btn[data-theme="${themeKey}"]`)?.classList.add('active');
