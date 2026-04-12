@@ -50,19 +50,20 @@
             background: rgba(255,255,250,0.95); backdrop-filter: blur(20px);
             border-top: 1px solid rgba(255,140,66,0.3);
             display: flex; justify-content: space-around; align-items: center;
-            padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+            padding: 10px 4px calc(10px + env(safe-area-inset-bottom));
             z-index: 100;
             transition: background 0.3s;
+            overflow-x: auto;
         }
         .nav-item {
-            display: flex; flex-direction: column; align-items: center; gap: 4px;
+            display: flex; flex-direction: column; align-items: center; gap: 2px;
             background: none; border: none; cursor: pointer;
-            padding: 8px 16px; border-radius: 40px; transition: all 0.2s;
-            flex: 1; max-width: 80px;
+            padding: 6px 8px; border-radius: 40px; transition: all 0.2s;
+            flex: 1; min-width: 55px;
         }
         .nav-item.active { background: rgba(255,140,66,0.15); }
-        .nav-icon { font-size: 24px; }
-        .nav-label { font-size: 11px; font-weight: 600; color: #8aa57a; }
+        .nav-icon { font-size: 20px; }
+        .nav-label { font-size: 9px; font-weight: 600; color: #8aa57a; white-space: nowrap; }
         .nav-item.active .nav-label { color: #ff8c42; }
         
         .header {
@@ -129,16 +130,6 @@
         .goal-card-fixed {
             background: linear-gradient(135deg, #1e3a2f, #2d6a4f);
             border: none;
-        }
-        .goal-card-fixed .affirmation-text {
-            color: #ffd9a5 !important;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        .goal-card-fixed .goal-label,
-        .goal-card-fixed .goal-value,
-        .goal-card-fixed .goal-target {
-            color: white !important;
         }
         
         .encouragement-section {
@@ -269,22 +260,33 @@
         
         .progress-bar-bg { background: #e0f0e4; border-radius: 40px; height: 10px; overflow: hidden; margin: 10px 0; transition: background 0.3s; }
         .progress-fill { background: linear-gradient(90deg, #ff8c42, #ffb347); width: 0%; height: 100%; border-radius: 40px; transition: background 0.3s; }
+        .progress-fill.over100 { background: linear-gradient(90deg, #FF6B3D, #FF4500); }
         
         .table-wrapper { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
         th, td { text-align: left; padding: 10px 6px; border-bottom: 1px solid #e0f0e4; transition: border-color 0.3s; }
         th { color: #ff8c42; font-weight: 600; transition: color 0.3s; }
         
-        input, textarea, select { background: #fefef5; border: 1px solid #deecd8; border-radius: 20px; padding: 8px 12px; font-size: 0.85rem; width: 100%; font-family: inherit; transition: border-color 0.3s; }
+        input, textarea, select { 
+            background: #fefef5; 
+            border: 1px solid #deecd8; 
+            border-radius: 20px; 
+            padding: 8px 12px; 
+            font-size: 0.85rem; 
+            width: 100%; 
+            font-family: inherit; 
+            transition: border-color 0.3s; 
+            color: #1e3a2f;
+        }
         input[type="number"] { width: auto; display: inline-block; }
         
         .activity-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-        .activity-item { flex: 1; min-width: 70px; text-align: center; background: #fefef5; padding: 10px; border-radius: 20px; transition: background 0.3s; }
+        .activity-item { flex: 1; min-width: 70px; text-align: center; background: #fefef5; padding: 10px; border-radius: 20px; transition: background 0.3s; color: #1e3a2f; }
         .activity-item input { text-align: center; width: 100%; margin-top: 6px; }
-        .pill { background: #ffe6c7; padding: 4px 12px; border-radius: 30px; font-size: 0.7rem; font-weight: 600; transition: background 0.3s; }
+        .pill { background: #ffe6c7; padding: 4px 12px; border-radius: 30px; font-size: 0.7rem; font-weight: 600; transition: background 0.3s; color: #1e3a2f; }
         
         .stats-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
-        .stat-item { flex: 1; min-width: 100px; background: #fefef5; padding: 16px 12px; border-radius: 24px; text-align: center; transition: background 0.3s; }
+        .stat-item { flex: 1; min-width: 100px; background: #fefef5; padding: 16px 12px; border-radius: 24px; text-align: center; transition: background 0.3s; color: #1e3a2f; }
         .stat-number { font-size: 1.8rem; font-weight: 800; color: #ff8c42; transition: color 0.3s; }
         .stat-label { font-size: 0.7rem; color: #8aa57a; margin-top: 4px; }
         
@@ -304,16 +306,16 @@
         
         .legend-container { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; background: rgba(255,255,245,0.9); padding: 16px 20px; border-radius: 40px; transition: background 0.3s; }
         .legend-group { background: white; border-radius: 24px; padding: 12px 16px; min-width: 180px; transition: background 0.3s; }
-        .legend-group-title { font-size: 13px; font-weight: 800; padding-bottom: 8px; margin-bottom: 8px; border-bottom: 2px solid; display: flex; align-items: center; gap: 8px; }
+        .legend-group-title { font-size: 13px; font-weight: 800; padding-bottom: 8px; margin-bottom: 8px; border-bottom: 2px solid; display: flex; align-items: center; gap: 8px; color: #1e3a2f; }
         .legend-items { display: flex; flex-direction: column; gap: 6px; }
-        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; padding: 4px 8px; border-radius: 20px; cursor: pointer; }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; padding: 4px 8px; border-radius: 20px; cursor: pointer; color: #1e3a2f; }
         
         .modal-mask { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30,50,30,0.6); backdrop-filter: blur(12px); display: flex; align-items: flex-end; justify-content: center; z-index: 1000; visibility: hidden; opacity: 0; transition: 0.2s; }
         .modal-mask.active { visibility: visible; opacity: 1; }
         .modal-content { background: white; width: 100%; max-width: 550px; border-radius: 40px 40px 0 0; padding: 28px 24px 34px; transform: translateY(100%); transition: 0.3s; border-top: 5px solid #ff8c42; max-height: 85vh; overflow-y: auto; }
         .active .modal-content { transform: translateY(0); }
         .activity-grid-modal { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; max-height: 320px; overflow-y: auto; }
-        .activity-option { padding: 10px 12px; border-radius: 24px; font-size: 11px; cursor: pointer; border: 2px solid transparent; }
+        .activity-option { padding: 10px 12px; border-radius: 24px; font-size: 11px; cursor: pointer; border: 2px solid transparent; color: #1e3a2f; }
         .activity-option.selected { border: 2px solid #ff8c42; background: #fff6e8; }
         .modal-btns { display: flex; gap: 12px; margin-top: 20px; }
         .btn-cancel { background: #eef3ea; color: #4d7a64; padding: 14px; border-radius: 40px; font-weight: 700; border: none; flex: 1; }
@@ -375,7 +377,207 @@
             color: #e67e22;
             margin-top: 8px;
         }
-        
+
+        /* 业绩追踪页面额外样式 */
+        .badge-flame {
+            background: linear-gradient(135deg, #FF8C42, #FFB347);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(255,140,66,0.3);
+            color: white;
+            display: inline-block;
+        }
+        .grid-2 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .grid-2 > * {
+            flex: 1;
+            min-width: 280px;
+        }
+        .activity-badge {
+            background: #FFF3E0;
+            border-radius: 20px;
+            padding: 12px;
+            margin-top: 12px;
+        }
+        .activity-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0;
+            color: #1e3a2f;
+        }
+        .tag {
+            background: #FFF0DF;
+            border-radius: 20px;
+            padding: 2px 10px;
+            font-size: 0.7rem;
+            display: inline-block;
+            color: #C45C1A;
+        }
+        .data-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            justify-content: flex-end;
+        }
+        .save-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        .daily-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+            background: #FFF9F0;
+            padding: 12px;
+            border-radius: 20px;
+        }
+        .daily-stat-item {
+            text-align: center;
+            color: #1e3a2f;
+        }
+        .daily-stat-item label {
+            font-size: 0.7rem;
+            color: #E67E22;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .daily-stat-item input {
+            text-align: center;
+            width: 100%;
+            padding: 6px;
+        }
+        .time-allocation-title {
+            background: #FFE6C7;
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin: 12px 0 8px 0;
+            font-weight: bold;
+            color: #C45C1A;
+            font-size: 0.8rem;
+        }
+        .prospect-table, .recruit-table {
+            width: 100%;
+            font-size: 0.7rem;
+        }
+        .prospect-table th, .recruit-table th {
+            font-size: 0.7rem;
+            padding: 6px 4px;
+        }
+        .prospect-table td, .recruit-table td {
+            padding: 4px;
+        }
+        .prospect-table input, .recruit-table input {
+            padding: 4px;
+            font-size: 0.7rem;
+        }
+        .quarter-summary {
+            background: #FFF3E0;
+            font-weight: bold;
+        }
+        .quarter-summary td {
+            border-top: 2px solid #FFCF9A;
+            border-bottom: 2px solid #FFCF9A;
+        }
+        .milestone-progress {
+            margin: 20px 0 15px;
+        }
+        .milestone-progress-item {
+            margin-bottom: 20px;
+        }
+        .milestone-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .milestone-item-progress {
+            background: #FFF9EF;
+            border-radius: 30px;
+            padding: 6px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #1e3a2f;
+        }
+        .milestone-name {
+            font-weight: 500;
+        }
+        .milestone-status {
+            font-size: 0.7rem;
+            background: #FFF0DF;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+        .milestone-status.done {
+            background: #C8E6C9;
+            color: #2E7D32;
+        }
+        button.small-btn {
+            background: #FFE0B5;
+            border: none;
+            border-radius: 30px;
+            padding: 4px 12px;
+            margin-left: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.7rem;
+        }
+        label {
+            color: #2d6a4f;
+            font-weight: 500;
+        }
+        .member-item {
+            color: #1e3a2f;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0f0e4;
+        }
+        .member-item strong {
+            color: #2d6a4f;
+        }
+
+        /* DT 图标破釜沉舟头部样式 */
+        .dt-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            justify-content: center;
+        }
+        .dt-header h1 {
+            font-size: 28px;
+            margin: 0;
+        }
+        .page-header-with-icon {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .page-header-with-icon h1 {
+            font-size: 26px;
+            margin: 0;
+        }
+
         @media (max-width: 700px) {
             .time-col { width: 70px; font-size: 10px; }
             .btn { padding: 6px 12px; font-size: 11px; }
@@ -387,6 +589,9 @@
             .theme-btn { width: 40px; height: 40px; }
             .title-icon { width: 32px; height: 32px; }
             h1 { font-size: 20px; }
+            .daily-stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .dt-header h1 { font-size: 22px; }
+            .page-header-with-icon h1 { font-size: 20px; }
         }
     </style>
 </head>
@@ -397,7 +602,7 @@
 
 <div class="page-container" id="appContainer">
     
-    <!-- 页面1：主页（时间管理） -->
+    <!-- ==================== 页面1：主页（时间管理）- 完全保留原功能 ==================== -->
     <div class="page active" id="page-home">
         <div class="header" id="mainHeader">
             <div class="title-wrapper">
@@ -434,14 +639,14 @@
                     <div style="font-size:32px; font-weight:800; color:white;" id="gspcValue">0</div>
                     <div style="font-size:12px; color:rgba(255,255,255,0.6);">目标: 450,000</div>
                     <div class="progress-bar-bg" style="background:rgba(255,255,255,0.2);"><div class="progress-fill" id="gspcFill" style="background:linear-gradient(90deg,#ff8c42,#ffb347);"></div></div>
-                    <div style="display:flex; gap:8px; margin-top:8px;"><input type="number" id="gspcInput" placeholder="当前业绩" style="background:white;"><button class="btn-primary" id="updateGspcBtn" style="padding:8px 16px;">更新</button></div>
+                    <div style="display:flex; gap:8px; margin-top:8px;"><input type="number" id="gspcInput" placeholder="当前业绩" style="background:white; color:#1e3a2f;"><button class="btn-primary" id="updateGspcBtn" style="padding:8px 16px;">更新</button></div>
                 </div>
                 <div style="flex:1; min-width:180px;">
                     <div style="font-size:14px; color:#ffd9a5;">👥 团队招聘新人</div>
                     <div style="font-size:32px; font-weight:800; color:white;" id="recruitValue">0</div>
                     <div style="font-size:12px; color:rgba(255,255,255,0.6);">目标: 10 位</div>
                     <div class="progress-bar-bg" style="background:rgba(255,255,255,0.2);"><div class="progress-fill" id="recruitFill" style="background:linear-gradient(90deg,#ff8c42,#ffb347);"></div></div>
-                    <div style="display:flex; gap:8px; margin-top:8px;"><input type="number" id="recruitInput" placeholder="已招聘人数" style="background:white;"><button class="btn-primary" id="updateRecruitBtn" style="padding:8px 16px;">更新</button></div>
+                    <div style="display:flex; gap:8px; margin-top:8px;"><input type="number" id="recruitInput" placeholder="已招聘人数" style="background:white; color:#1e3a2f;"><button class="btn-primary" id="updateRecruitBtn" style="padding:8px 16px;">更新</button></div>
                 </div>
             </div>
             <div style="margin-top:16px; text-align:center; padding:12px; background:rgba(255,140,66,0.2); border-radius:40px;">
@@ -460,8 +665,8 @@
                 </div>
             </div>
             <div style="display:flex; flex-wrap:wrap; gap:20px;">
-                <div style="flex:1; min-width:250px; background:#fefef5; border-radius:24px; padding:16px;"><h4 style="text-align:center; margin-bottom:12px;">📈 按活动类别分布</h4><canvas id="categoryChart" width="400" height="300"></canvas></div>
-                <div style="flex:1; min-width:250px; background:#fefef5; border-radius:24px; padding:16px;"><h4 style="text-align:center; margin-bottom:12px;">⏰ 按时间段分布</h4><canvas id="timeChart" width="400" height="300"></canvas></div>
+                <div style="flex:1; min-width:250px; background:#fefef5; border-radius:24px; padding:16px;"><h4 style="text-align:center; margin-bottom:12px; color:#1e3a2f;">📈 按活动类别分布</h4><canvas id="categoryChart" width="400" height="300"></canvas></div>
+                <div style="flex:1; min-width:250px; background:#fefef5; border-radius:24px; padding:16px;"><h4 style="text-align:center; margin-bottom:12px; color:#1e3a2f;">⏰ 按时间段分布</h4><canvas id="timeChart" width="400" height="300"></canvas></div>
             </div>
             <div id="statsSummary" style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:16px;"></div>
         </div>
@@ -482,54 +687,232 @@
                 <div class="encouragement-hint">✨ 点击换一句激励 | 500条热血语录</div>
             </div>
             <div style="display:flex; gap:14px; flex-wrap:wrap;">
-                <div style="flex:1; background:#fefef5; border-radius:24px; padding:14px;"><div style="font-size:13px; font-weight:700; color:#527a6e; margin-bottom:10px;">📝💭 今日检讨 / 反思</div><div id="reflectionContent" contenteditable="true" style="background:white; border-radius:18px; padding:12px; min-height:70px; border:1px dashed #ffd9a5;"></div></div>
-                <div style="flex:1; background:#fefef5; border-radius:24px; padding:14px;"><div style="font-size:13px; font-weight:700; color:#527a6e; margin-bottom:10px;">🙏🌻 今日感恩 / 鼓励自己</div><div id="gratitudeContent" contenteditable="true" style="background:white; border-radius:18px; padding:12px; min-height:70px; border:1px dashed #ffd9a5;"></div></div>
+                <div style="flex:1; background:#fefef5; border-radius:24px; padding:14px;"><div style="font-size:13px; font-weight:700; color:#527a6e; margin-bottom:10px;">📝💭 今日检讨 / 反思</div><div id="reflectionContent" contenteditable="true" style="background:white; border-radius:18px; padding:12px; min-height:70px; border:1px dashed #ffd9a5; color:#1e3a2f;"></div></div>
+                <div style="flex:1; background:#fefef5; border-radius:24px; padding:14px;"><div style="font-size:13px; font-weight:700; color:#527a6e; margin-bottom:10px;">🙏🌻 今日感恩 / 鼓励自己</div><div id="gratitudeContent" contenteditable="true" style="background:white; border-radius:18px; padding:12px; min-height:70px; border:1px dashed #ffd9a5; color:#1e3a2f;"></div></div>
             </div>
         </div>
 
         <!-- 周计划区域 -->
         <div class="week-scroll"><div class="week-buttons" id="weekNav"></div></div>
-        <div style="display:flex; justify-content:space-between; margin:8px 0 12px;"><span class="date-range">📅 <span id="weekRange">--</span></span><span class="lunar-date" id="lunarDateDisplay">🌙 加载中...</span></div>
+        <div style="display:flex; justify-content:space-between; margin:8px 0 12px;"><span class="date-range" style="color:#1e3a2f;">📅 <span id="weekRange">--</span></span><span class="lunar-date" id="lunarDateDisplay" style="color:#1e3a2f;">🌙 加载中...</span></div>
         <div class="legend-container" id="legendContainer"></div>
         <div class="timeline-wrapper"><table class="timeline-table" id="timelineGrid"><thead id="tableHeader"></thead><tbody id="tableBody"></tbody></table></div>
     </div>
 
-    <!-- 页面2：业绩追踪 -->
+    <!-- ==================== 页面2：破釜沉舟（业绩追踪核心看板+月历+战将+里程碑） ==================== -->
     <div class="page" id="page-performance">
         <div class="performance-header">
-            <h1>🎯 破釜沉舟 · 势必逆风翻盘</h1>
-            <div class="sub">🔥 450K GSPC + 10战将 🔥</div>
+            <div class="dt-header">
+                <canvas id="dtIconCanvas2" class="title-icon" width="40" height="40" style="width:40px; height:40px; border-radius:10px;"></canvas>
+                <h1 style="background: linear-gradient(135deg, #e67e22, #f39c12, #f1c40f); -webkit-background-clip: text; background-clip: text; color: transparent;">破釜沉舟</h1>
+            </div>
+            <div class="sub">🔥 势必逆风翻盘 · 450K GSPC + 10战将 🔥</div>
+            <div class="badge-flame" style="margin-top: 10px;">🏆 2026 阳光逆袭 🏆</div>
         </div>
+
+        <!-- 核心看板 -->
         <div class="card">
             <div class="stats-grid">
-                <div class="stat-item"><div class="stat-number" id="perfPersonal">0</div><div class="stat-label">个人 QFYLP</div></div>
-                <div class="stat-item"><div class="stat-number" id="perfTeam">0</div><div class="stat-label">团队 QFYLP</div></div>
-                <div class="stat-item"><div class="stat-number" id="perfRecruit">0</div><div class="stat-label">招募战将 / 10</div></div>
-                <div class="stat-item"><div class="stat-number" id="perfTotalNOC">0</div><div class="stat-label">累计 NOC</div></div>
-                <div class="stat-item"><div class="stat-number" id="perfTotalANP">0</div><div class="stat-label">累计 ANP</div></div>
+                <div class="stat-item"><div><span class="stat-number" id="displayPersonal">0</span></div><div style="font-size:0.7rem; color:#8aa57a;">/ 450,000 个人QFYLP</div></div>
+                <div class="stat-item"><div><span class="stat-number" id="displayNOC">0</span></div><div style="font-size:0.7rem; color:#8aa57a;">总成交件数(NOC)</div></div>
+                <div class="stat-item"><div><span class="stat-number" id="displayANP">0</span></div><div style="font-size:0.7rem; color:#8aa57a;">总成交ANP</div></div>
+                <div class="stat-item"><div><span class="stat-number" id="displayTeam">0</span></div><div style="font-size:0.7rem; color:#8aa57a;">/ 300,000 团队QFYLP</div></div>
+                <div class="stat-item"><div><span class="stat-number" id="displayRecruit">0</span></div><div style="font-size:0.7rem; color:#8aa57a;">/ 10 招募战将</div></div>
             </div>
-            <div class="progress-bar-bg"><div class="progress-fill" id="perfPersonalFill"></div></div>
-            <div class="progress-bar-bg"><div class="progress-fill" id="perfTeamFill" style="background:#ffb347;"></div></div>
-            <div class="progress-bar-bg"><div class="progress-fill" id="perfRecruitFill" style="background:#ffb347;"></div></div>
+            <div class="progress-bar-bg"><div class="progress-fill" id="personalProgressFill" style="width:0%"></div></div>
+            <div class="progress-bar-bg"><div class="progress-fill" id="teamProgressFill" style="background: #FFB347; width:0%"></div></div>
+            <div class="progress-bar-bg"><div class="progress-fill" id="recruitProgressFill" style="background: #FFB347; width:0%"></div></div>
+            <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size:0.75rem; color:#1e3a2f;">
+                <span>个人完成率 <span id="personalPercent">0</span>%</span>
+                <span>团队完成率 <span id="teamPercent">0</span>%</span>
+                <span>招募进度 <span id="recruitPercent">0</span>%</span>
+            </div>
+            <div class="data-actions">
+                <button class="btn-secondary" id="exportPerfDataBtn">📥 导出备份</button>
+                <button class="btn-secondary" id="importPerfDataBtn">📤 导入恢复</button>
+                <input type="file" id="importPerfFile" style="display:none;" accept=".json">
+            </div>
         </div>
-        <div class="card"><h2>📆 2026 冲锋月历 · 业绩+NOC+ANP（1-12月）</h2><div class="table-wrapper"><table id="monthlyTable"><thead> <tr><th>月份</th><th>个人目标</th><th>累计QFYLP</th><th>实际QFYLP</th><th>NOC</th><th>ANP</th><th>招募目标</th><th>实际招募</th><th>累计招募</th></tr></thead><tbody id="monthlyTbody"></tbody></table></div></div>
-        <div class="card"><h2>🎯 销售行动 · OPFC (周目标18访)</h2><div style="background:#fefef5; border-radius:24px; padding:16px;"><div style="display:flex; justify-content:space-between;"><span>📊 本周累计: <strong id="weeklyTotalActs">0</strong> / 18</span><span class="pill" id="weeklyActsPercent">0%</span></div><div class="activity-grid"><div class="activity-item">🔓 OPEN<br><input type="number" id="weekOF" value="0"></div><div class="activity-item">📢 P<br><input type="number" id="weekP" value="0"></div><div class="activity-item">🔄 F<br><input type="number" id="weekF" value="0"></div><div class="activity-item">✅ C<br><input type="number" id="weekC" value="0"></div></div><button class="btn-secondary" id="resetWeekActs">重置本周</button></div></div>
-        <div class="card"><h2>👥 招募行动 · RO→RS (周目标6访)</h2><div style="background:#fefef5; border-radius:24px; padding:16px;"><div style="display:flex; justify-content:space-between;"><span>📊 本周累计: <strong id="weeklyRecruitTotal">0</strong> / 6</span><span class="pill" id="weeklyRecruitPercent">0%</span></div><div class="activity-grid"><div class="activity-item">📂 RO<br><input type="number" id="weekRO" value="0"></div><div class="activity-item">🎤 RP<br><input type="number" id="weekRP" value="0"></div><div class="activity-item">🔄 RF<br><input type="number" id="weekRF" value="0"></div><div class="activity-item">🏆 RS<br><input type="number" id="weekRS" value="0"></div></div><button class="btn-secondary" id="resetWeekRecruit">重置本周</button></div></div>
-        <div class="card"><h2>🌅 夜间打卡</h2><div style="display:flex; gap:12px; flex-wrap:wrap;"><div><label>🔥 今日斩获 QFYLP</label><input type="number" id="todayQ" value="0" style="width:110px;"></div><div><label>📄 今日成交件数</label><input type="number" id="todayNOC" value="0" style="width:90px;"></div><div><button class="btn-primary" id="nightCheckBtn">🌙 夜间打卡</button></div></div><div id="nightMessage" style="background:#fefef5; border-radius:20px; padding:12px; margin-top:12px;"></div></div>
-        <div class="data-actions"><button class="btn-secondary" id="exportPerfBtn">📥 导出备份</button><button class="btn-secondary" id="importPerfBtn">📤 导入恢复</button><input type="file" id="importPerfFile" style="display:none;" accept=".json"></div>
+
+        <!-- 1. 2026 冲锋月历 · 季度汇总 -->
+        <div class="card">
+            <h2>📆 2026 冲锋月历 · 业绩+NOC+ANP（季度汇总）</h2>
+            <div class="table-wrapper">
+                <table id="monthlyTable">
+                    <thead>
+                        <tr><th>季度/月份</th><th>个人目标</th><th>实际QFYLP</th><th>NOC</th><th>ANP</th><th>招募目标</th><th>实际招募</th></tr>
+                    </thead>
+                    <tbody id="monthlyTbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 2. 麾下战将 -->
+        <div class="card"><h2>🛡️ 麾下战将</h2><div id="memberList"></div><button class="btn-primary" id="addMemberBtn">+ 增添组员</button></div>
+
+        <!-- 3. 荣耀里程碑 · 双进度条 -->
+        <div class="card">
+            <h2>🏅 荣耀里程碑 · 成就进度</h2>
+            <div class="milestone-progress">
+                <div class="milestone-progress-item">
+                    <div style="display: flex; justify-content: space-between; font-size:0.75rem; margin-bottom:4px; color:#1e3a2f;">
+                        <span>📈 个人销售里程碑</span>
+                        <span><span id="salesMilestoneDone">0</span>/4 完成</span>
+                    </div>
+                    <div class="progress-bar-bg"><div class="progress-fill" id="salesMilestoneFill" style="width:0%"></div></div>
+                </div>
+                <div class="milestone-progress-item">
+                    <div style="display: flex; justify-content: space-between; font-size:0.75rem; margin-bottom:4px; color:#1e3a2f;">
+                        <span>👥 招聘/团队里程碑</span>
+                        <span><span id="recruitMilestoneDone">0</span>/4 完成</span>
+                    </div>
+                    <div class="progress-bar-bg"><div class="progress-fill" id="recruitMilestoneFill" style="width:0%"></div></div>
+                </div>
+            </div>
+            <div class="milestone-grid" id="milestoneGrid"></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px; padding: 16px; font-size: 0.75rem; color: #B97F3A;">☀️ 破釜沉舟 · 势必翻盘 ☀️</div>
+        <div style="text-align: center; padding: 12px; font-size: 0.7rem; color: #D49A5A; border-top: 1px solid #FFE0B5;">🔧 Developer: <span style="font-weight: 600; color: #E67E22;">David Tung</span></div>
     </div>
 
-    <!-- 页面3：设置 -->
+    <!-- ==================== 页面3：名单宝库（Prospect List + 潜在战将） ==================== -->
+    <div class="page" id="page-list">
+        <div class="header" style="margin-bottom: 16px;">
+            <div class="page-header-with-icon">
+                <canvas id="dtIconCanvas3" class="title-icon" width="40" height="40" style="width:40px; height:40px; border-radius:10px;"></canvas>
+                <h1>📋 名单宝库</h1>
+            </div>
+            <div class="sub">高净值目标 · 招募管道</div>
+        </div>
+
+        <!-- 高净值目标 Prospect List 1-25 -->
+        <div class="card">
+            <h2>🏹 Prospect List · 高净值目标 (1-25)</h2>
+            <div class="table-wrapper">
+                <table class="prospect-table" id="prospectTable">
+                    <thead>
+                        <tr><th>#</th><th>姓名</th><th>行业/职位</th><th>方案&amp;Plan</th><th>备注</th></tr>
+                    </thead>
+                    <tbody id="prospectTbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 潜在战将 1-25 -->
+        <div class="card">
+            <h2>👊 潜在战将 · 招募管道 (1-25)</h2>
+            <div class="table-wrapper">
+                <table class="recruit-table" id="recruitTable">
+                    <thead>
+                        <tr><th>#</th><th>姓名</th><th>目前职业</th><th>兴趣度(1-5)</th><th>跟进情况</th></tr>
+                    </thead>
+                    <tbody id="recruitTbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 页面4：3v6R（每日誓师+销售行动+招募行动） ==================== -->
+    <div class="page" id="page-3v6r">
+        <div class="header" style="margin-bottom: 16px;">
+            <div class="page-header-with-icon">
+                <canvas id="dtIconCanvas4" class="title-icon" width="40" height="40" style="width:40px; height:40px; border-radius:10px;"></canvas>
+                <h1>⚡ 3v6R · 日常行动</h1>
+            </div>
+            <div class="sub">每日誓师 · 销售OPFC · 招募RO→RS</div>
+        </div>
+
+        <!-- 每日誓师 · 时间分配检讨 · 夜间打卡 -->
+        <div class="card">
+            <h2>🌅 每日誓师 · 时间分配检讨 · 夜间打卡</h2>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;">
+                <div style="flex:1; min-width:200px;"><label>⚔️ 今日必达3件大事</label><textarea rows="2" id="dailyMission" placeholder="1. 约见高净值&#10;2. 完成2场面谈&#10;3. 跟进新人" style="color:#1e3a2f;"></textarea></div>
+                <div style="flex:1; min-width:150px;"><label>🎯 今日作战指标</label><input id="dailyGoal" placeholder="例: 面谈3场" style="color:#1e3a2f;"></div>
+            </div>
+            <div class="time-allocation-title">📋 今日活动量记录 · 时间分配检讨</div>
+            <div class="daily-stats-grid">
+                <div class="daily-stat-item"><label>🔓 今日OPEN</label><input type="number" id="dailyOF" value="0" style="color:#1e3a2f;"></div>
+                <div class="daily-stat-item"><label>📢 今日P</label><input type="number" id="dailyP" value="0" style="color:#1e3a2f;"></div>
+                <div class="daily-stat-item"><label>🔄 今日F</label><input type="number" id="dailyF" value="0" style="color:#1e3a2f;"></div>
+                <div class="daily-stat-item"><label>✅ 今日C</label><input type="number" id="dailyC" value="0" style="color:#1e3a2f;"></div>
+                <div class="daily-stat-item"><label>📂 今日RO</label><input type="number" id="dailyRO" value="0" style="color:#1e3a2f;"></div>
+                <div class="daily-stat-item"><label>🎤 今日RP</label><input type="number" id="dailyRP" value="0" style="color:#1e3a2f;"></div>
+                <div class="daily-stat-item"><label>🔄 今日RF</label><input type="number" id="dailyRF" value="0" style="color:#1e3a2f;"></div>
+                <div class="daily-stat-item"><label>🏆 今日RS</label><input type="number" id="dailyRS" value="0" style="color:#1e3a2f;"></div>
+            </div>
+            <div style="background: #FFF3E0; border-radius: 16px; padding: 12px; margin: 12px 0;">
+                <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; color:#1e3a2f;">
+                    <div><strong>📊 今日销售总访数:</strong> <span id="dailySalesTotal">0</span> 次</div>
+                    <div><strong>👥 今日招募总访数:</strong> <span id="dailyRecruitTotal">0</span> 次</div>
+                    <div><strong>🎯 今日总活动量:</strong> <span id="dailyTotalActivity">0</span> 次</div>
+                </div>
+            </div>
+            <div style="margin-top: 12px; display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end;">
+                <div><label>🔥 今日斩获 QFYLP</label><input type="number" id="todayQ" value="0" style="width:110px; color:#1e3a2f;"></div>
+                <div><label>📄 今日成交件数</label><input type="number" id="todayNOC" value="0" style="width:90px; color:#1e3a2f;"></div>
+                <div><label>💰 今日成交 ANP</label><input type="number" id="todayANP" value="0" style="width:100px; color:#1e3a2f;"></div>
+                <div><button class="btn-primary" id="nightCheckBtn">🌙 夜间打卡</button></div>
+            </div>
+            <div id="nightMessage" style="margin-top: 16px; background:#FFF3E0; padding: 12px; border-radius: 20px; font-size:0.8rem; white-space: pre-wrap; color:#1e3a2f;"></div>
+            <div style="margin-top: 16px;">
+                <details>
+                    <summary style="color: #E67E22; font-weight: 500; padding: 8px;">📜 查看最近7天打卡记录</summary>
+                    <div id="historyLog" style="margin-top: 12px; max-height: 300px; overflow-y: auto; font-size: 0.75rem; color:#1e3a2f;"></div>
+                </details>
+            </div>
+        </div>
+
+        <!-- 销售行动 + 招募行动 并排 -->
+        <div class="grid-2">
+            <div class="card">
+                <h2>🎯 销售行动 · OPFC (周目标18访)</h2>
+                <div class="activity-badge">
+                    <div class="activity-row"><span>📊 本周累计访数: <strong id="weeklyTotalActs">0</strong> / 18 访</span><span class="pill" id="weeklyActsPercent">0%</span></div>
+                    <div class="activity-grid">
+                        <div class="activity-item">🔓 OPEN<br><input type="number" id="weekOF" value="0" style="color:#1e3a2f;"></div>
+                        <div class="activity-item">📢 P<br><input type="number" id="weekP" value="0" style="color:#1e3a2f;"></div>
+                        <div class="activity-item">🔄 F<br><input type="number" id="weekF" value="0" style="color:#1e3a2f;"></div>
+                        <div class="activity-item">✅ C<br><input type="number" id="weekC" value="0" style="color:#1e3a2f;"></div>
+                    </div>
+                    <div class="activity-row"><span>📈 本周成交 NOC: <span id="weekClosedNOC">0</span> 件</span>
+                    <span>💰 本周成交 ANP: <span id="weekClosedANP">0</span></span>
+                    <button class="btn-primary" id="resetWeekActs" style="padding:4px 12px;">重置</button></div>
+                </div>
+            </div>
+            <div class="card">
+                <h2>👥 招募行动 · RO→RS (周目标6访)</h2>
+                <div class="activity-badge">
+                    <div class="activity-row"><span>📊 本周招募累计访数: <strong id="weeklyRecruitTotal">0</strong> / 6 访</span><span class="pill" id="weeklyRecruitPercent">0%</span></div>
+                    <div class="activity-grid">
+                        <div class="activity-item">📂 RO<br><input type="number" id="weekRO" value="0" style="color:#1e3a2f;"></div>
+                        <div class="activity-item">🎤 RP<br><input type="number" id="weekRP" value="0" style="color:#1e3a2f;"></div>
+                        <div class="activity-item">🔄 RF<br><input type="number" id="weekRF" value="0" style="color:#1e3a2f;"></div>
+                        <div class="activity-item">🏆 RS<br><input type="number" id="weekRS" value="0" style="color:#1e3a2f;"></div>
+                    </div>
+                    <div class="activity-row"><span>🌟 本周招募成功(RS): <span id="weekRSCount">0</span> 人</span>
+                    <button class="btn-primary" id="resetWeekRecruit" style="padding:4px 12px;">重置</button></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px; padding: 16px; font-size: 0.75rem; color: #B97F3A;">⚡ OPFC 周访18 · 招募周访6 · 每日检讨时间分配 ⚡</div>
+    </div>
+
+    <!-- ==================== 页面5：设置 ==================== -->
     <div class="page" id="page-settings">
         <div class="header" style="margin-bottom: 16px;">
-            <h1>⚙️ 设置</h1>
+            <div class="page-header-with-icon">
+                <canvas id="dtIconCanvas5" class="title-icon" width="40" height="40" style="width:40px; height:40px; border-radius:10px;"></canvas>
+                <h1>⚙️ 设置</h1>
+            </div>
             <div class="sub">个性化配置 | 关于应用</div>
         </div>
         <div class="card" style="background: linear-gradient(135deg, #2d6a4f, #1e3a2f); text-align: center;">
             <div style="font-size: 48px; margin-bottom: 12px;">👨‍💻</div>
             <div style="font-size: 22px; font-weight: 800; color: #ff8c42; margin-bottom: 8px;">David Tung</div>
             <div style="font-size: 14px; color: #ffd9a5; margin-bottom: 8px;">首席开发者 & 时间管理导师</div>
-            <div style="font-size: 12px; color: rgba(255,255,255,0.7);">“成功吸引成功，我是超级卓越主管”</div>
+            <div style="font-size: 12px; color: rgba(255,255,255,0.7);">"成功吸引成功，我是超级卓越主管"</div>
             <div style="margin-top: 16px; display: flex; justify-content: center; gap: 20px;">
                 <div style="text-align: center;"><div style="font-size: 20px; font-weight: 700; color: #ff8c42;">450K</div><div style="font-size: 10px; color: rgba(255,255,255,0.6);">GSPC 目标</div></div>
                 <div style="text-align: center;"><div style="font-size: 20px; font-weight: 700; color: #ff8c42;">10</div><div style="font-size: 10px; color: rgba(255,255,255,0.6);">战将目标</div></div>
@@ -556,10 +939,10 @@
         </div>
         
         <div class="card">
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #e0f0e4;"><span style="font-size: 15px; font-weight: 500;">🌙 深色模式</span><input type="checkbox" id="darkMode" style="width:auto;"></div>
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #e0f0e4;"><span style="font-size: 15px; font-weight: 500;">🗑️ 清除所有数据</span><button class="btn-secondary" id="clearDataBtn">清除</button></div>
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #e0f0e4;"><span style="font-size: 15px; font-weight: 500;">ℹ️ 版本信息</span><span style="font-size: 13px; color: #8aa57a;">v2.0.0 | 2026</span></div>
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0;"><span style="font-size: 15px; font-weight: 500;">📞 联系开发者</span><a href="https://wa.me/60162946245" target="_blank" style="font-size: 13px; color: #25D366; text-decoration: none; font-weight: 600;">WhatsApp: 016-2946245</a></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #e0f0e4;"><span style="font-size: 15px; font-weight: 500; color:#1e3a2f;">🌙 深色模式</span><input type="checkbox" id="darkMode" style="width:auto;"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #e0f0e4;"><span style="font-size: 15px; font-weight: 500; color:#1e3a2f;">🗑️ 清除所有数据</span><button class="btn-secondary" id="clearDataBtn">清除</button></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #e0f0e4;"><span style="font-size: 15px; font-weight: 500; color:#1e3a2f;">ℹ️ 版本信息</span><span style="font-size: 13px; color: #8aa57a;">v2.0.0 | 2026</span></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0;"><span style="font-size: 15px; font-weight: 500; color:#1e3a2f;">📞 联系开发者</span><a href="https://wa.me/60162946245" target="_blank" style="font-size: 13px; color: #25D366; text-decoration: none; font-weight: 600;">WhatsApp: 016-2946245</a></div>
         </div>
         <div style="text-align: center; margin-top: 20px; padding: 16px; font-size: 11px; color: #b8c8a8;">© 2026 David Tung 时间管理大师<br>成功吸引成功，我是超级卓越主管</div>
     </div>
@@ -582,9 +965,12 @@
     </div>
 </div>
 
+<!-- 底部导航栏 - 5个选项 -->
 <div class="bottom-nav">
     <button class="nav-item active" data-page="home"><span class="nav-icon">🏠</span><span class="nav-label">主页</span></button>
-    <button class="nav-item" data-page="performance"><span class="nav-icon">🎯</span><span class="nav-label">业绩追踪</span></button>
+    <button class="nav-item" data-page="performance"><span class="nav-icon">🎯</span><span class="nav-label">破釜沉舟</span></button>
+    <button class="nav-item" data-page="list"><span class="nav-icon">📋</span><span class="nav-label">名单宝库</span></button>
+    <button class="nav-item" data-page="3v6r"><span class="nav-icon">⚡</span><span class="nav-label">3v6R</span></button>
     <button class="nav-item" data-page="settings"><span class="nav-icon">⚙️</span><span class="nav-label">设置</span></button>
 </div>
 
@@ -595,6 +981,7 @@
 
 <div class="modal-mask" id="todoModal"><div class="modal-content"><h3>✅ 添加重要事项</h3><div class="form-field"><label>📌 事项内容</label><input type="text" id="todoInput" placeholder="例：完成项目报告"></div><div class="modal-btns"><button class="btn-cancel" id="closeTodoModalBtn">取消</button><button class="btn-primary" id="saveTodoBtn">添加</button></div></div></div>
 <input type="file" id="fileInput" accept=".json" style="display:none">
+<div class="save-indicator" id="saveIndicator">✓ 已保存</div>
 
 <script>
     // ========== 页面切换 ==========
@@ -604,6 +991,7 @@
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
         document.querySelector(`.nav-item[data-page="${pageId}"]`).classList.add('active');
         if (pageId === 'home' && typeof updateCharts === 'function') setTimeout(updateCharts, 100);
+        if ((pageId === 'performance' || pageId === 'list' || pageId === '3v6r') && typeof renderAllPerf === 'function') setTimeout(renderAllPerf, 50);
     }
     document.querySelectorAll('.nav-item').forEach(item => { item.addEventListener('click', () => switchPage(item.dataset.page)); });
     
@@ -783,7 +1171,7 @@
             <h1>📋 David Tung 时间管理大师 - 周报</h1>
             <div class="report-date">📅 报告周期：${weekStart.getFullYear()}年${weekStart.getMonth()+1}月${weekStart.getDate()}日 - ${weekEnd.getFullYear()}年${weekEnd.getMonth()+1}月${weekEnd.getDate()}日</div>
             <div class="report-date">📝 生成时间：${new Date().toLocaleString()}</div>
-            <div class="encouragement"><strong>🏆 本周激励语：</strong><br>“${document.getElementById('dailyEncouragement')?.innerText || '今天也要闪闪发光！'}”</div>
+            <div class="encouragement"><strong>🏆 本周激励语：</strong><br>"${document.getElementById('dailyEncouragement')?.innerText || '今天也要闪闪发光！'}"</div>
             <h2>🎯 年度目标进度</h2>
             <table><thead><tr><th>目标</th><th>当前进度</th><th>目标值</th><th>完成率</th></tr></thead>
             <tbody><tr><td>💰 GSPC 业绩</td><td>${(parseInt(localStorage.getItem('david_tung_gspc')||0)).toLocaleString()}</td><td>450,000</td><td>${Math.min(100, Math.round((parseInt(localStorage.getItem('david_tung_gspc')||0)/450000)*100))}%</td></tr>
@@ -946,7 +1334,7 @@
         
         let rangeText=currentChartRange==="week"?"本周":(currentChartRange==="month"?"本月":"全部");
         let topCat=(()=>{ let c=[{key:"green",name:"销售核心"},{key:"yellow",name:"规划支持"},{key:"orange",name:"招募拓展"},{key:"blue",name:"学习会议"},{key:"red",name:"生活平衡"}]; let mk="green",mv=0; c.forEach(cat=>{if(stats.groupHours[cat.key]>mv){mv=stats.groupHours[cat.key];mk=cat.name;}}); return mv>0?mk:"暂无";})();
-        document.getElementById('statsSummary').innerHTML = `<div style="background:#fefef5; border-radius:20px; padding:10px 16px; text-align:center;"><div style="font-size:20px; font-weight:700; color:#ff8c42;">${rangeText}</div><div style="font-size:11px;">周期</div></div><div style="background:#fefef5; border-radius:20px; padding:10px 16px; text-align:center;"><div style="font-size:20px; font-weight:700; color:#ff8c42;">${Math.round(stats.totalHours*10)/10}</div><div style="font-size:11px;">总小时</div></div><div style="background:#fefef5; border-radius:20px; padding:10px 16px; text-align:center;"><div style="font-size:20px; font-weight:700; color:#ff8c42;">${stats.eventCount}</div><div style="font-size:11px;">任务数</div></div><div style="background:#fefef5; border-radius:20px; padding:10px 16px; text-align:center;"><div style="font-size:20px; font-weight:700; color:#ff8c42;">${topCat}</div><div style="font-size:11px;">最活跃</div></div>`;
+        document.getElementById('statsSummary').innerHTML = `<div style="background:#fefef5; border-radius:20px; padding:10px 16px; text-align:center;"><div style="font-size:20px; font-weight:700; color:#ff8c42;">${rangeText}</div><div style="font-size:11px; color:#8aa57a;">周期</div></div><div style="background:#fefef5; border-radius:20px; padding:10px 16px; text-align:center;"><div style="font-size:20px; font-weight:700; color:#ff8c42;">${Math.round(stats.totalHours*10)/10}</div><div style="font-size:11px; color:#8aa57a;">总小时</div></div><div style="background:#fefef5; border-radius:20px; padding:10px 16px; text-align:center;"><div style="font-size:20px; font-weight:700; color:#ff8c42;">${stats.eventCount}</div><div style="font-size:11px; color:#8aa57a;">任务数</div></div><div style="background:#fefef5; border-radius:20px; padding:10px 16px; text-align:center;"><div style="font-size:20px; font-weight:700; color:#ff8c42;">${topCat}</div><div style="font-size:11px; color:#8aa57a;">最活跃</div></div>`;
     }
     
     function renderTimeline(){
@@ -1030,57 +1418,168 @@
     loadFromLocal(); loadTodos(); loadDailyData(); renderLegend(); renderWeekNav(); renderTimeline(); updateDailyEncouragement(); setupAutoSave(); populateHourSelects(); loadGoals();
     
     // ========== 业绩追踪完整功能 ==========
+    function formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+    function setProgressWidth(element, percent) {
+        if (!element) return;
+        let width = Math.min(percent, 100);
+        element.style.width = width + "%";
+        if (percent >= 100) {
+            element.classList.add("over100");
+        } else {
+            element.classList.remove("over100");
+        }
+    }
+    
+    function ensureMilestoneCategories() {
+        const salesNames = ["🔥 个人100K QFYLP", "⚡ 个人200K QFYLP", "🏆 个人300K QFYLP", "👑 个人450K GSPC"];
+        const recruitNames = ["🤝 招募第1位战将", "🌟 招募第5位战将", "💎 招募第10位精英", "🛡️ 团队活跃4人组"];
+        perfData.milestones.forEach(m => {
+            if (!m.category) {
+                if (salesNames.includes(m.name)) m.category = "sales";
+                else if (recruitNames.includes(m.name)) m.category = "recruit";
+                else m.category = "sales";
+            }
+        });
+    }
+    
     let perfData = {
         personalQ: 0, teamQ: 0, recruitCount: 0, totalNOC: 0, totalANP: 0,
         monthlyRecords: [],
+        prospectList: Array(25).fill().map(() => ({ name: "", job: "", plan: "", note: "" })),
+        recruitList: Array(25).fill().map(() => ({ name: "", job: "", interest: "", followup: "" })),
+        teamMembers: [],
         weekActs: { OF:0, P:0, F:0, C:0 },
         weekRecruitActs: { RO:0, RP:0, RF:0, RS:0 },
-        todayQ: 0, todayNOC: 0, nightMessage: "",
-        highValueClients: [], recruits: [], teamMembers: [],
-        dailyLogs: [], dailyMission: "", dailyGoal: "", dailyActivities: { of:0,p:0,f:0,c:0,ro:0,rp:0,rf:0,rs:0 },
+        weekClosedANP: 0,
+        dailyLogs: [],
+        monthStats: { monthTarget:50000, monthActual:0, monthNoc:0, monthAnp:0, monthMeeting:0, monthNewCli:0, monthNewRecruitContact:0, monthSigned:0 },
+        weekStats: { weekTarget:12500, weekActual:0, weekMeeting:0, weekNewCli:0, weekNewRecruit:0, weekDeals:0, weekAnp:0, weeklyReflect:"" },
+        dailyMission: "", dailyGoal: "", todayQ:0, todayNOC:0, todayANP:0, 
+        dailyActivities: { of:0, p:0, f:0, c:0, ro:0, rp:0, rf:0, rs:0 },
+        nightMessage: "",
         milestones: [
-            { name: "🔥 个人100K QFYLP", achieved: false }, { name: "⚡ 个人200K QFYLP", achieved: false },
-            { name: "🏆 个人300K QFYLP", achieved: false }, { name: "👑 个人450K GSPC", achieved: false },
-            { name: "🤝 招募第1位战将", achieved: false }, { name: "🌟 招募第5位战将", achieved: false },
-            { name: "💎 招募第10位精英", achieved: false }, { name: "🛡️ 团队活跃4人组", achieved: false }
+            { name: "🔥 个人100K QFYLP", achieved: false, category: "sales" },
+            { name: "⚡ 个人200K QFYLP", achieved: false, category: "sales" },
+            { name: "🏆 个人300K QFYLP", achieved: false, category: "sales" },
+            { name: "👑 个人450K GSPC", achieved: false, category: "sales" },
+            { name: "🤝 招募第1位战将", achieved: false, category: "recruit" },
+            { name: "🌟 招募第5位战将", achieved: false, category: "recruit" },
+            { name: "💎 招募第10位精英", achieved: false, category: "recruit" },
+            { name: "🛡️ 团队活跃4人组", achieved: false, category: "recruit" }
         ]
     };
-    
+
     function initMonthly() {
         if(perfData.monthlyRecords.length === 0) {
-            const months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
-            perfData.monthlyRecords = months.map((month, idx) => ({
+            const months = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
+            perfData.monthlyRecords = months.map(month => ({
                 month: month,
                 target: 50000,
                 actual: 0,
                 noc: 0,
                 anp: 0,
-                recruitTarget: (idx === 11 ? 2 : 1),
+                recruitTarget: (month === "12月" ? 2 : 1),
                 recruitActual: 0
             }));
+        } else if (perfData.monthlyRecords.length === 10 && perfData.monthlyRecords[0].month === "3月") {
+            const oldRecords = [...perfData.monthlyRecords];
+            perfData.monthlyRecords = [
+                { month:"1月", target:50000, actual:0, noc:0, anp:0, recruitTarget:1, recruitActual:0 },
+                { month:"2月", target:50000, actual:0, noc:0, anp:0, recruitTarget:1, recruitActual:0 },
+                ...oldRecords
+            ];
+        }
+        perfData.monthlyRecords.forEach(m => {
+            if (m.noc === undefined) m.noc = 0;
+            if (m.anp === undefined) m.anp = 0;
+        });
+        if(!perfData.prospectList || perfData.prospectList.length !== 25) {
+            perfData.prospectList = Array(25).fill().map(() => ({ name: "", job: "", plan: "", note: "" }));
+        }
+        if(!perfData.recruitList || perfData.recruitList.length !== 25) {
+            perfData.recruitList = Array(25).fill().map(() => ({ name: "", job: "", interest: "", followup: "" }));
         }
         if(!perfData.weekActs) perfData.weekActs = { OF:0, P:0, F:0, C:0 };
         if(!perfData.weekRecruitActs) perfData.weekRecruitActs = { RO:0, RP:0, RF:0, RS:0 };
         if(!perfData.dailyLogs) perfData.dailyLogs = [];
         if(!perfData.dailyActivities) perfData.dailyActivities = { of:0, p:0, f:0, c:0, ro:0, rp:0, rf:0, rs:0 };
+        if(!perfData.monthStats) perfData.monthStats = { monthTarget:50000, monthActual:0, monthNoc:0, monthAnp:0, monthMeeting:0, monthNewCli:0, monthNewRecruitContact:0, monthSigned:0 };
+        if(!perfData.weekStats) perfData.weekStats = { weekTarget:12500, weekActual:0, weekMeeting:0, weekNewCli:0, weekNewRecruit:0, weekDeals:0, weekAnp:0, weeklyReflect:"" };
+        ensureMilestoneCategories();
+    }
+
+    function showSaveIndicator() { 
+        let ind = document.getElementById('saveIndicator'); 
+        if(ind) { ind.style.opacity = '1'; setTimeout(() => ind.style.opacity = '0', 800); } 
     }
     
-    function recalcPerfTotals() {
+    function savePerfData() {
+        try {
+            perfData.dailyMission = document.getElementById('dailyMission')?.value||"";
+            perfData.dailyGoal = document.getElementById('dailyGoal')?.value||"";
+            perfData.todayQ = parseFloat(document.getElementById('todayQ')?.value)||0;
+            perfData.todayNOC = parseFloat(document.getElementById('todayNOC')?.value)||0;
+            perfData.todayANP = parseFloat(document.getElementById('todayANP')?.value)||0;
+            perfData.dailyActivities = {
+                of: parseInt(document.getElementById('dailyOF')?.value)||0,
+                p: parseInt(document.getElementById('dailyP')?.value)||0,
+                f: parseInt(document.getElementById('dailyF')?.value)||0,
+                c: parseInt(document.getElementById('dailyC')?.value)||0,
+                ro: parseInt(document.getElementById('dailyRO')?.value)||0,
+                rp: parseInt(document.getElementById('dailyRP')?.value)||0,
+                rf: parseInt(document.getElementById('dailyRF')?.value)||0,
+                rs: parseInt(document.getElementById('dailyRS')?.value)||0
+            };
+            for(let i=0; i<perfData.monthlyRecords.length; i++) {
+                let actual = parseFloat(document.getElementById(`month_actual_${i}`)?.value) || 0;
+                let noc = parseFloat(document.getElementById(`month_noc_${i}`)?.value) || 0;
+                let anp = parseFloat(document.getElementById(`month_anp_${i}`)?.value) || 0;
+                let recruitActual = parseFloat(document.getElementById(`month_recruit_${i}`)?.value) || 0;
+                perfData.monthlyRecords[i].actual = actual;
+                perfData.monthlyRecords[i].noc = noc;
+                perfData.monthlyRecords[i].anp = anp;
+                perfData.monthlyRecords[i].recruitActual = recruitActual;
+            }
+            for(let i=0; i<25; i++) {
+                let name = document.getElementById(`prospect_name_${i}`)?.value || "";
+                let job = document.getElementById(`prospect_job_${i}`)?.value || "";
+                let plan = document.getElementById(`prospect_plan_${i}`)?.value || "";
+                let note = document.getElementById(`prospect_note_${i}`)?.value || "";
+                if(perfData.prospectList[i]) perfData.prospectList[i] = { name, job, plan, note };
+            }
+            for(let i=0; i<25; i++) {
+                let name = document.getElementById(`recruit_name_${i}`)?.value || "";
+                let job = document.getElementById(`recruit_job_${i}`)?.value || "";
+                let interest = document.getElementById(`recruit_interest_${i}`)?.value || "";
+                let followup = document.getElementById(`recruit_followup_${i}`)?.value || "";
+                if(perfData.recruitList[i]) perfData.recruitList[i] = { name, job, interest, followup };
+            }
+            localStorage.setItem("DavidTung_Sunshine_2026", JSON.stringify(perfData));
+            showSaveIndicator();
+        } catch(e) { console.log("save error", e); }
+    }
+    
+    function autoSavePerf() { setTimeout(savePerfData, 200); }
+    
+    function recalcTotals() {
         let personalTotal = 0, totalNOC = 0, totalANP = 0, recruitTotal = 0;
-        perfData.monthlyRecords.forEach(m => {
-            personalTotal += m.actual;
-            totalNOC += (m.noc || 0);
-            totalANP += (m.anp || 0);
-            recruitTotal += m.recruitActual;
+        perfData.monthlyRecords.forEach(m => { 
+            personalTotal += m.actual; 
+            totalNOC += (m.noc||0); 
+            totalANP += (m.anp||0);
+            recruitTotal += m.recruitActual; 
         });
         perfData.personalQ = personalTotal;
         perfData.totalNOC = totalNOC;
         perfData.totalANP = totalANP;
         perfData.recruitCount = recruitTotal;
-        let teamFromMembers = perfData.teamMembers.reduce((s,m) => s + (m.performance||0), 0);
+        let teamFromMembers = perfData.teamMembers.reduce((s,m)=> s + (m.performance||0),0);
         perfData.teamQ = perfData.personalQ + teamFromMembers;
         
-        perfData.milestones.forEach(m => {
+        perfData.milestones.forEach(m=>{
             if(m.name.includes("100K") && perfData.personalQ>=100000) m.achieved=true;
             if(m.name.includes("200K") && perfData.personalQ>=200000) m.achieved=true;
             if(m.name.includes("300K") && perfData.personalQ>=300000) m.achieved=true;
@@ -1092,121 +1591,406 @@
             if(m.name.includes("活跃4人") && activeCount>=4) m.achieved=true;
         });
         savePerfData();
-        renderPerformance();
     }
     
-    function renderPerformance() {
-        document.getElementById("perfPersonal").innerText = perfData.personalQ.toLocaleString();
-        document.getElementById("perfTeam").innerText = perfData.teamQ.toLocaleString();
-        document.getElementById("perfRecruit").innerText = perfData.recruitCount;
-        document.getElementById("perfTotalNOC").innerText = perfData.totalNOC.toLocaleString();
-        document.getElementById("perfTotalANP").innerText = perfData.totalANP.toLocaleString();
-        let pct = Math.min(100, (perfData.personalQ/450000)*100);
-        let tpct = Math.min(100, (perfData.teamQ/300000)*100);
-        let rpct = Math.min(100, (perfData.recruitCount/10)*100);
-        document.getElementById("perfPersonalFill").style.width = pct + "%";
-        document.getElementById("perfTeamFill").style.width = tpct + "%";
-        document.getElementById("perfRecruitFill").style.width = rpct + "%";
-        
+    function renderMonthlyTable() {
         let tbody = document.getElementById("monthlyTbody");
-        if(tbody) {
-            tbody.innerHTML = "";
-            let cumQ = 0, cumRec = 0;
-            perfData.monthlyRecords.forEach((m, idx) => {
-                cumQ += m.actual;
-                cumRec += m.recruitActual;
-                let row = tbody.insertRow();
-                row.insertCell(0).innerHTML = m.month;
-                row.insertCell(1).innerHTML = m.target.toLocaleString();
-                row.insertCell(2).innerHTML = cumQ.toLocaleString();
-                let cell3 = row.insertCell(3);
-                let inpQ = document.createElement("input"); inpQ.type = "number"; inpQ.value = m.actual; inpQ.style.width = "80px";
-                inpQ.onchange = (function(index) { return function() { perfData.monthlyRecords[index].actual = parseFloat(this.value) || 0; recalcPerfTotals(); }; })(idx);
-                cell3.appendChild(inpQ);
-                let cell4 = row.insertCell(4);
-                let inpNoc = document.createElement("input"); inpNoc.type = "number"; inpNoc.value = m.noc || 0; inpNoc.style.width = "70px";
-                inpNoc.onchange = (function(index) { return function() { perfData.monthlyRecords[index].noc = parseFloat(this.value) || 0; recalcPerfTotals(); }; })(idx);
-                cell4.appendChild(inpNoc);
-                let cell5 = row.insertCell(5);
-                let inpAnp = document.createElement("input"); inpAnp.type = "number"; inpAnp.value = m.anp || 0; inpAnp.style.width = "80px";
-                inpAnp.onchange = (function(index) { return function() { perfData.monthlyRecords[index].anp = parseFloat(this.value) || 0; recalcPerfTotals(); }; })(idx);
-                cell5.appendChild(inpAnp);
-                row.insertCell(6).innerHTML = m.recruitTarget;
-                let cell7 = row.insertCell(7);
-                let inpRec = document.createElement("input"); inpRec.type = "number"; inpRec.value = m.recruitActual; inpRec.style.width = "70px";
-                inpRec.onchange = (function(index) { return function() { perfData.monthlyRecords[index].recruitActual = parseFloat(this.value) || 0; recalcPerfTotals(); }; })(idx);
-                cell7.appendChild(inpRec);
-                row.insertCell(8).innerHTML = cumRec;
+        if(!tbody) return;
+        tbody.innerHTML = "";
+        const quarterMonths = [
+            { name: "Q1 (1-3月)", months: ["1月","2月","3月"] },
+            { name: "Q2 (4-6月)", months: ["4月","5月","6月"] },
+            { name: "Q3 (7-9月)", months: ["7月","8月","9月"] },
+            { name: "Q4 (10-12月)", months: ["10月","11月","12月"] }
+        ];
+        
+        quarterMonths.forEach(quarter => {
+            quarter.months.forEach(monthName => {
+                const record = perfData.monthlyRecords.find(r => r.month === monthName);
+                if (!record) return;
+                const idx = perfData.monthlyRecords.indexOf(record);
+                const row = tbody.insertRow();
+                row.insertCell(0).innerHTML = monthName;
+                row.insertCell(1).innerHTML = formatNumber(record.target);
+                const cellActual = row.insertCell(2);
+                const inpQ = document.createElement("input");
+                inpQ.type = "number";
+                inpQ.value = record.actual;
+                inpQ.style.width = "80px";
+                inpQ.id = `month_actual_${idx}`;
+                inpQ.onchange = () => { record.actual = parseFloat(inpQ.value)||0; recalcTotals(); renderAllPerf(); };
+                cellActual.appendChild(inpQ);
+                const cellNoc = row.insertCell(3);
+                const inpNoc = document.createElement("input");
+                inpNoc.type = "number";
+                inpNoc.value = record.noc||0;
+                inpNoc.style.width = "70px";
+                inpNoc.id = `month_noc_${idx}`;
+                inpNoc.onchange = () => { record.noc = parseFloat(inpNoc.value)||0; recalcTotals(); renderAllPerf(); };
+                cellNoc.appendChild(inpNoc);
+                const cellAnp = row.insertCell(4);
+                const inpAnp = document.createElement("input");
+                inpAnp.type = "number";
+                inpAnp.value = record.anp||0;
+                inpAnp.style.width = "80px";
+                inpAnp.id = `month_anp_${idx}`;
+                inpAnp.onchange = () => { record.anp = parseFloat(inpAnp.value)||0; recalcTotals(); renderAllPerf(); };
+                cellAnp.appendChild(inpAnp);
+                row.insertCell(5).innerHTML = record.recruitTarget;
+                const cellRec = row.insertCell(6);
+                const inpRec = document.createElement("input");
+                inpRec.type = "number";
+                inpRec.value = record.recruitActual;
+                inpRec.style.width = "70px";
+                inpRec.id = `month_recruit_${idx}`;
+                inpRec.onchange = () => { record.recruitActual = parseFloat(inpRec.value)||0; recalcTotals(); renderAllPerf(); };
+                cellRec.appendChild(inpRec);
+            });
+            const quarterRecords = perfData.monthlyRecords.filter(r => quarter.months.includes(r.month));
+            const sumQ = quarterRecords.reduce((s, r) => s + r.actual, 0);
+            const sumNoc = quarterRecords.reduce((s, r) => s + (r.noc||0), 0);
+            const sumAnp = quarterRecords.reduce((s, r) => s + (r.anp||0), 0);
+            const sumRecruit = quarterRecords.reduce((s, r) => s + r.recruitActual, 0);
+            
+            const summaryRow = tbody.insertRow();
+            summaryRow.className = "quarter-summary";
+            summaryRow.insertCell(0).innerHTML = `📊 ${quarter.name} 汇总`;
+            summaryRow.insertCell(1).innerHTML = "—";
+            summaryRow.insertCell(2).innerHTML = formatNumber(sumQ);
+            summaryRow.insertCell(3).innerHTML = sumNoc;
+            summaryRow.insertCell(4).innerHTML = formatNumber(sumAnp);
+            summaryRow.insertCell(5).innerHTML = "—";
+            summaryRow.insertCell(6).innerHTML = sumRecruit;
+        });
+    }
+    
+    function renderProspectList() {
+        let tbody = document.getElementById("prospectTbody");
+        if(!tbody) return;
+        tbody.innerHTML = "";
+        for(let i=0; i<25; i++) {
+            let p = perfData.prospectList[i] || { name:"", job:"", plan:"", note:"" };
+            let row = tbody.insertRow();
+            row.insertCell(0).innerHTML = i+1;
+            let cell1 = row.insertCell(1);
+            let inpName = document.createElement("input"); inpName.type = "text"; inpName.value = p.name; inpName.placeholder = "姓名"; inpName.id = `prospect_name_${i}`; inpName.oninput = autoSavePerf; cell1.appendChild(inpName);
+            let cell2 = row.insertCell(2);
+            let inpJob = document.createElement("input"); inpJob.type = "text"; inpJob.value = p.job; inpJob.placeholder = "行业/职位"; inpJob.id = `prospect_job_${i}`; inpJob.oninput = autoSavePerf; cell2.appendChild(inpJob);
+            let cell3 = row.insertCell(3);
+            let inpPlan = document.createElement("input"); inpPlan.type = "text"; inpPlan.value = p.plan; inpPlan.placeholder = "方案/计划"; inpPlan.id = `prospect_plan_${i}`; inpPlan.oninput = autoSavePerf; cell3.appendChild(inpPlan);
+            let cell4 = row.insertCell(4);
+            let inpNote = document.createElement("input"); inpNote.type = "text"; inpNote.value = p.note; inpNote.placeholder = "备注"; inpNote.id = `prospect_note_${i}`; inpNote.oninput = autoSavePerf; cell4.appendChild(inpNote);
+        }
+    }
+    
+    function renderRecruitList() {
+        let tbody = document.getElementById("recruitTbody");
+        if(!tbody) return;
+        tbody.innerHTML = "";
+        for(let i=0; i<25; i++) {
+            let r = perfData.recruitList[i] || { name:"", job:"", interest:"", followup:"" };
+            let row = tbody.insertRow();
+            row.insertCell(0).innerHTML = i+1;
+            let cell1 = row.insertCell(1);
+            let inpName = document.createElement("input"); inpName.type = "text"; inpName.value = r.name; inpName.placeholder = "姓名"; inpName.id = `recruit_name_${i}`; inpName.oninput = autoSavePerf; cell1.appendChild(inpName);
+            let cell2 = row.insertCell(2);
+            let inpJob = document.createElement("input"); inpJob.type = "text"; inpJob.value = r.job; inpJob.placeholder = "目前职业"; inpJob.id = `recruit_job_${i}`; inpJob.oninput = autoSavePerf; cell2.appendChild(inpJob);
+            let cell3 = row.insertCell(3);
+            let inpInterest = document.createElement("input"); inpInterest.type = "text"; inpInterest.value = r.interest; inpInterest.placeholder = "兴趣度1-5"; inpInterest.id = `recruit_interest_${i}`; inpInterest.oninput = autoSavePerf; cell3.appendChild(inpInterest);
+            let cell4 = row.insertCell(4);
+            let inpFollow = document.createElement("input"); inpFollow.type = "text"; inpFollow.value = r.followup; inpFollow.placeholder = "跟进情况"; inpFollow.id = `recruit_followup_${i}`; inpFollow.oninput = autoSavePerf; cell4.appendChild(inpFollow);
+        }
+    }
+
+    function renderTeamMembers() {
+        let container = document.getElementById("memberList");
+        if(!container) return;
+        container.innerHTML = "";
+        perfData.teamMembers.forEach((m, idx) => {
+            let div = document.createElement("div");
+            div.className = "member-item";
+            div.innerHTML = `<strong>⚔️ ${m.name}</strong> | 签约:${m.joinDate} | 业绩: ${formatNumber(m.performance||0)} QFYLP
+            <div><input type="number" id="perfInput-${idx}" value="${m.performance||0}" style="width:100px;"><button class="small-btn" onclick="perfData.teamMembers[${idx}].performance=parseFloat(document.getElementById('perfInput-${idx}').value)||0; recalcTotals(); renderAllPerf();">更新</button>
+            <button class="small-btn" onclick="perfData.teamMembers.splice(${idx},1); recalcTotals(); renderAllPerf();">移除</button></div>`;
+            container.appendChild(div);
+        });
+    }
+    
+    function renderMilestonesProgress() {
+        ensureMilestoneCategories();
+        let salesMilestones = perfData.milestones.filter(m => m.category === "sales");
+        let salesDone = salesMilestones.filter(m => m.achieved).length;
+        let salesTotal = salesMilestones.length;
+        let salesPercent = salesTotal > 0 ? (salesDone / salesTotal) * 100 : 0;
+        setProgressWidth(document.getElementById("salesMilestoneFill"), salesPercent);
+        document.getElementById("salesMilestoneDone").innerText = salesDone;
+        
+        let recruitMilestones = perfData.milestones.filter(m => m.category === "recruit");
+        let recruitDone = recruitMilestones.filter(m => m.achieved).length;
+        let recruitTotal = recruitMilestones.length;
+        let recruitPercent = recruitTotal > 0 ? (recruitDone / recruitTotal) * 100 : 0;
+        setProgressWidth(document.getElementById("recruitMilestoneFill"), recruitPercent);
+        document.getElementById("recruitMilestoneDone").innerText = recruitDone;
+        
+        let grid = document.getElementById("milestoneGrid");
+        if(grid) {
+            grid.innerHTML = "";
+            perfData.milestones.forEach(m => {
+                let div = document.createElement("div");
+                div.className = "milestone-item-progress";
+                div.innerHTML = `<span class="milestone-name">${m.name}</span><span class="milestone-status ${m.achieved ? 'done' : ''}">${m.achieved ? '✅ 已达成' : '⏳ 冲刺中'}</span>`;
+                grid.appendChild(div);
             });
         }
+    }
+    
+    function renderHistoryLog() {
+        let container = document.getElementById("historyLog");
+        if(!container) return;
+        if(!perfData.dailyLogs || perfData.dailyLogs.length === 0) {
+            container.innerHTML = "<div style='text-align:center; color:#B97F3A; padding:16px;'>暂无打卡记录</div>";
+            return;
+        }
+        container.innerHTML = "";
+        let recentLogs = [...perfData.dailyLogs].reverse().slice(0, 7);
+        recentLogs.forEach(log => {
+            let div = document.createElement("div");
+            div.style.background = "#FFF9F0";
+            div.style.borderRadius = "16px";
+            div.style.padding = "10px";
+            div.style.marginBottom = "8px";
+            div.style.border = "1px solid #FFE0B5";
+            div.style.fontSize = "0.7rem";
+            div.innerHTML = log;
+            container.appendChild(div);
+        });
+    }
+    
+    function updateSalesActions() {
+        let of = parseInt(document.getElementById('weekOF').value) || 0;
+        let p = parseInt(document.getElementById('weekP').value) || 0;
+        let f = parseInt(document.getElementById('weekF').value) || 0;
+        let c = parseInt(document.getElementById('weekC').value) || 0;
+        perfData.weekActs = { OF: of, P: p, F: f, C: c };
+        let totalActs = of + p + f + c;
+        document.getElementById('weeklyTotalActs').innerText = totalActs;
+        let percent = (totalActs / 18) * 100;
+        document.getElementById('weeklyActsPercent').innerText = Math.floor(percent) + "%";
+        document.getElementById('weekClosedNOC').innerText = c;
+        autoSavePerf();
+        renderAllPerf();
+    }
+    
+    function updateRecruitActions() {
+        let ro = parseInt(document.getElementById('weekRO').value) || 0;
+        let rp = parseInt(document.getElementById('weekRP').value) || 0;
+        let rf = parseInt(document.getElementById('weekRF').value) || 0;
+        let rs = parseInt(document.getElementById('weekRS').value) || 0;
+        perfData.weekRecruitActs = { RO: ro, RP: rp, RF: rf, RS: rs };
+        let totalRecruitActs = ro + rp + rf + rs;
+        document.getElementById('weeklyRecruitTotal').innerText = totalRecruitActs;
+        let percent = (totalRecruitActs / 6) * 100;
+        document.getElementById('weeklyRecruitPercent').innerText = Math.floor(percent) + "%";
+        document.getElementById('weekRSCount').innerText = rs;
+        autoSavePerf();
+        renderAllPerf();
+    }
+    
+    function updateDailyActivityDisplay() {
+        let of = parseInt(document.getElementById('dailyOF').value) || 0;
+        let p = parseInt(document.getElementById('dailyP').value) || 0;
+        let f = parseInt(document.getElementById('dailyF').value) || 0;
+        let c = parseInt(document.getElementById('dailyC').value) || 0;
+        let ro = parseInt(document.getElementById('dailyRO').value) || 0;
+        let rp = parseInt(document.getElementById('dailyRP').value) || 0;
+        let rf = parseInt(document.getElementById('dailyRF').value) || 0;
+        let rs = parseInt(document.getElementById('dailyRS').value) || 0;
+        let salesTotal = of + p + f + c;
+        let recruitTotal = ro + rp + rf + rs;
+        document.getElementById('dailySalesTotal').innerText = salesTotal;
+        document.getElementById('dailyRecruitTotal').innerText = recruitTotal;
+        document.getElementById('dailyTotalActivity').innerText = salesTotal + recruitTotal;
+    }
+    
+    function renderAllPerf() {
+        document.getElementById("displayPersonal").innerText = formatNumber(perfData.personalQ);
+        document.getElementById("displayNOC").innerText = formatNumber(perfData.totalNOC);
+        document.getElementById("displayANP").innerText = formatNumber(perfData.totalANP);
+        document.getElementById("displayTeam").innerText = formatNumber(perfData.teamQ);
+        document.getElementById("displayRecruit").innerText = formatNumber(perfData.recruitCount);
+        
+        let personalPct = (perfData.personalQ / 450000) * 100;
+        setProgressWidth(document.getElementById("personalProgressFill"), personalPct);
+        document.getElementById("personalPercent").innerText = Math.floor(personalPct);
+        
+        let teamPct = (perfData.teamQ / 300000) * 100;
+        setProgressWidth(document.getElementById("teamProgressFill"), teamPct);
+        document.getElementById("teamPercent").innerText = Math.floor(teamPct);
+        
+        let recruitPct = (perfData.recruitCount / 10) * 100;
+        setProgressWidth(document.getElementById("recruitProgressFill"), recruitPct);
+        document.getElementById("recruitPercent").innerText = Math.floor(recruitPct);
+        
+        renderMonthlyTable();
+        renderProspectList();
+        renderRecruitList();
+        renderTeamMembers();
+        renderMilestonesProgress();
+        renderHistoryLog();
         
         document.getElementById("weekOF").value = perfData.weekActs.OF;
         document.getElementById("weekP").value = perfData.weekActs.P;
         document.getElementById("weekF").value = perfData.weekActs.F;
         document.getElementById("weekC").value = perfData.weekActs.C;
-        let totalActs = perfData.weekActs.OF + perfData.weekActs.P + perfData.weekActs.F + perfData.weekActs.C;
-        document.getElementById("weeklyTotalActs").innerText = totalActs;
-        document.getElementById("weeklyActsPercent").innerText = Math.min(100, Math.floor((totalActs/18)*100)) + "%";
-        
         document.getElementById("weekRO").value = perfData.weekRecruitActs.RO;
         document.getElementById("weekRP").value = perfData.weekRecruitActs.RP;
         document.getElementById("weekRF").value = perfData.weekRecruitActs.RF;
         document.getElementById("weekRS").value = perfData.weekRecruitActs.RS;
-        let totalRecruit = perfData.weekRecruitActs.RO + perfData.weekRecruitActs.RP + perfData.weekRecruitActs.RF + perfData.weekRecruitActs.RS;
-        document.getElementById("weeklyRecruitTotal").innerText = totalRecruit;
-        document.getElementById("weeklyRecruitPercent").innerText = Math.min(100, Math.floor((totalRecruit/6)*100)) + "%";
         
+        let totalActs = perfData.weekActs.OF + perfData.weekActs.P + perfData.weekActs.F + perfData.weekActs.C;
+        document.getElementById("weeklyTotalActs").innerText = totalActs;
+        let salesPercent = (totalActs / 18) * 100;
+        document.getElementById("weeklyActsPercent").innerText = Math.floor(salesPercent) + "%";
+        document.getElementById("weekClosedNOC").innerText = perfData.weekActs.C;
+        
+        let totalRecruitActs = perfData.weekRecruitActs.RO + perfData.weekRecruitActs.RP + perfData.weekRecruitActs.RF + perfData.weekRecruitActs.RS;
+        document.getElementById("weeklyRecruitTotal").innerText = totalRecruitActs;
+        let recruitPercentVal = (totalRecruitActs / 6) * 100;
+        document.getElementById("weeklyRecruitPercent").innerText = Math.floor(recruitPercentVal) + "%";
+        document.getElementById("weekRSCount").innerText = perfData.weekRecruitActs.RS;
+        
+        document.getElementById("dailyMission").value = perfData.dailyMission;
+        document.getElementById("dailyGoal").value = perfData.dailyGoal;
         document.getElementById("todayQ").value = perfData.todayQ;
         document.getElementById("todayNOC").value = perfData.todayNOC;
+        document.getElementById("todayANP").value = perfData.todayANP;
+        document.getElementById("dailyOF").value = perfData.dailyActivities.of;
+        document.getElementById("dailyP").value = perfData.dailyActivities.p;
+        document.getElementById("dailyF").value = perfData.dailyActivities.f;
+        document.getElementById("dailyC").value = perfData.dailyActivities.c;
+        document.getElementById("dailyRO").value = perfData.dailyActivities.ro;
+        document.getElementById("dailyRP").value = perfData.dailyActivities.rp;
+        document.getElementById("dailyRF").value = perfData.dailyActivities.rf;
+        document.getElementById("dailyRS").value = perfData.dailyActivities.rs;
         document.getElementById("nightMessage").innerHTML = perfData.nightMessage || "";
+        
+        updateDailyActivityDisplay();
     }
     
-    function savePerfData() { localStorage.setItem("DavidTung_Sunshine_2026", JSON.stringify(perfData)); }
-    function loadPerfData() {
-        let raw = localStorage.getItem("DavidTung_Sunshine_2026");
-        if(raw) { try { let saved = JSON.parse(raw); perfData = { ...perfData, ...saved }; } catch(e){} }
-        initMonthly();
-        recalcPerfTotals();
-    }
-    
-    document.getElementById("resetWeekActs")?.addEventListener("click", () => {
-        perfData.weekActs = {OF:0,P:0,F:0,C:0};
-        renderPerformance(); savePerfData(); showToast("本周销售行动已重置");
-    });
-    document.getElementById("resetWeekRecruit")?.addEventListener("click", () => {
-        perfData.weekRecruitActs = {RO:0,RP:0,RF:0,RS:0};
-        renderPerformance(); savePerfData(); showToast("本周招募行动已重置");
-    });
-    document.getElementById("nightCheckBtn")?.addEventListener("click", () => {
-        let todayQ = parseFloat(document.getElementById("todayQ").value) || 0;
-        let todayNOC = parseFloat(document.getElementById("todayNOC").value) || 0;
-        perfData.todayQ = todayQ;
-        perfData.todayNOC = todayNOC;
-        perfData.nightMessage = `🌙 ${new Date().toLocaleString()} 打卡：斩获 ${todayQ.toLocaleString()} QFYLP，${todayNOC} 件`;
-        savePerfData(); renderPerformance(); showToast("✅ 夜间打卡已记录");
-    });
-    document.getElementById("exportPerfBtn")?.addEventListener("click", () => {
-        let a = document.createElement('a');
-        a.href = URL.createObjectURL(new Blob([JSON.stringify(perfData)], {type:"application/json"}));
-        a.download = `perf_backup_${new Date().toISOString().slice(0,10)}.json`;
-        a.click(); showToast("📥 导出成功");
-    });
-    document.getElementById("importPerfBtn")?.addEventListener("click", () => document.getElementById("importPerfFile")?.click());
-    document.getElementById("importPerfFile")?.addEventListener("change", e => {
-        let f = e.target.files[0];
-        if(f) {
-            let r = new FileReader();
-            r.onload = ev => {
-                try {
-                    let d = JSON.parse(ev.target.result);
-                    perfData = { ...perfData, ...d };
-                    recalcPerfTotals();
-                    showToast("✅ 导入成功");
-                } catch(e) { showToast("❌ 导入失败"); }
-            };
-            r.readAsText(f);
+    // 绑定业绩追踪页面事件 - 使用事件委托避免冲突
+    document.addEventListener('click', function(e) {
+        if (e.target.id === 'resetWeekActs') {
+            perfData.weekActs = {OF:0,P:0,F:0,C:0}; 
+            document.getElementById("weekOF").value = 0;
+            document.getElementById("weekP").value = 0;
+            document.getElementById("weekF").value = 0;
+            document.getElementById("weekC").value = 0;
+            updateSalesActions();
+            renderAllPerf(); 
+            autoSavePerf(); 
+            showToast("本周销售行动已重置");
+        }
+        if (e.target.id === 'resetWeekRecruit') {
+            perfData.weekRecruitActs = {RO:0,RP:0,RF:0,RS:0};
+            document.getElementById("weekRO").value = 0;
+            document.getElementById("weekRP").value = 0;
+            document.getElementById("weekRF").value = 0;
+            document.getElementById("weekRS").value = 0;
+            updateRecruitActions();
+            renderAllPerf(); 
+            autoSavePerf(); 
+            showToast("本周招募行动已重置");
+        }
+        if (e.target.id === 'nightCheckBtn') {
+            let todayVal = parseFloat(document.getElementById("todayQ").value)||0;
+            let todayNocVal = parseFloat(document.getElementById("todayNOC").value)||0;
+            let todayAnpVal = parseFloat(document.getElementById("todayANP").value)||0;
+            let mission = document.getElementById("dailyMission").value;
+            let of = parseInt(document.getElementById("dailyOF").value)||0;
+            let p = parseInt(document.getElementById("dailyP").value)||0;
+            let f = parseInt(document.getElementById("dailyF").value)||0;
+            let c = parseInt(document.getElementById("dailyC").value)||0;
+            let ro = parseInt(document.getElementById("dailyRO").value)||0;
+            let rp = parseInt(document.getElementById("dailyRP").value)||0;
+            let rf = parseInt(document.getElementById("dailyRF").value)||0;
+            let rs = parseInt(document.getElementById("dailyRS").value)||0;
+            let salesTotal = of + p + f + c;
+            let recruitTotal = ro + rp + rf + rs;
+            let logEntry = `📅 ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}\n💰 业绩: ${formatNumber(todayVal)} QFYLP | ${todayNocVal} 件 | ANP ${formatNumber(todayAnpVal)}\n🎯 销售: OPEN ${of} | P ${p} | F ${f} | C ${c} | 总访 ${salesTotal}\n👥 招募: RO ${ro} | RP ${rp} | RF ${rf} | RS ${rs} | 总访 ${recruitTotal}\n⚔️ 目标: ${mission ? mission.substring(0,50) : '未设定'}\n━━━━━━━━━━━━━━━━━━━━━━\n`;
+            if(!perfData.dailyLogs) perfData.dailyLogs = [];
+            perfData.dailyLogs.unshift(logEntry);
+            if(perfData.dailyLogs.length > 30) perfData.dailyLogs.pop();
+            perfData.nightMessage = `🌙 ${new Date().toLocaleDateString()} 打卡完成！\n💰 斩获 ${formatNumber(todayVal)} QFYLP，${todayNocVal} 件，ANP ${formatNumber(todayAnpVal)}\n🎯 销售 ${salesTotal} 访 | 招募 ${recruitTotal} 访 | 总计 ${salesTotal+recruitTotal} 次活动`;
+            renderAllPerf(); 
+            autoSavePerf();
+            showToast("✅ 今日打卡已记录！");
+        }
+        if (e.target.id === 'addMemberBtn') {
+            let n = prompt("组员名"); 
+            if(n){ 
+                perfData.teamMembers.push({name:n, joinDate:new Date().toLocaleDateString(), coaching:0, performance:0, active:true}); 
+                recalcTotals(); 
+                renderAllPerf(); 
+                showToast("✅ 已添加组员");
+            } 
+        }
+        if (e.target.id === 'exportPerfDataBtn') {
+            let a = document.createElement('a'); 
+            a.href = URL.createObjectURL(new Blob([JSON.stringify(perfData,null,2)],{type:"application/json"})); 
+            a.download = `DavidTung_backup_${new Date().toISOString().slice(0,10)}.json`; 
+            a.click(); 
+            showToast("📥 导出成功");
+        }
+        if (e.target.id === 'importPerfDataBtn') {
+            document.getElementById("importPerfFile")?.click();
         }
     });
+    
+    document.addEventListener('change', function(e) {
+        if (e.target.id === 'importPerfFile') {
+            let f = e.target.files[0]; 
+            if(!f) return; 
+            let r = new FileReader(); 
+            r.onload = ev => { 
+                try { 
+                    let d = JSON.parse(ev.target.result); 
+                    perfData = {...perfData, ...d}; 
+                    if(!perfData.monthlyRecords) initMonthly(); 
+                    recalcTotals(); 
+                    renderAllPerf(); 
+                    showToast("✅ 导入成功");
+                } catch(e){ 
+                    showToast("❌ 格式错误"); 
+                } 
+            }; 
+            r.readAsText(f); 
+        }
+    });
+    
+    // 监听输入事件更新销售和招募行动
+    document.addEventListener('input', function(e) {
+        if (e.target.id === 'weekOF' || e.target.id === 'weekP' || e.target.id === 'weekF' || e.target.id === 'weekC') {
+            updateSalesActions();
+        }
+        if (e.target.id === 'weekRO' || e.target.id === 'weekRP' || e.target.id === 'weekRF' || e.target.id === 'weekRS') {
+            updateRecruitActions();
+        }
+        if (e.target.id && (e.target.id.startsWith('daily') || e.target.id === 'todayQ' || e.target.id === 'todayNOC' || e.target.id === 'todayANP' || e.target.id === 'dailyMission' || e.target.id === 'dailyGoal')) {
+            autoSavePerf();
+            updateDailyActivityDisplay();
+        }
+        if (e.target.id && (e.target.id.startsWith('prospect_') || e.target.id.startsWith('recruit_') || e.target.id.startsWith('month_'))) {
+            autoSavePerf();
+        }
+    });
+    
+    function loadPerfData() {
+        let raw = localStorage.getItem("DavidTung_Sunshine_2026");
+        if(raw) { try { let saved = JSON.parse(raw); perfData = {...perfData, ...saved}; } catch(e){} }
+        initMonthly();
+        recalcTotals();
+        renderAllPerf();
+    }
     
     loadPerfData();
     
@@ -1264,12 +2048,20 @@
         ctx.fill();
     }
     
-    function updateSmallIcon(theme) {
-        const canvas = document.getElementById('dtIconCanvas');
+    function updateSmallIcon(theme, canvasId) {
+        const canvas = document.getElementById(canvasId);
         if (canvas) {
             const ctx = canvas.getContext('2d');
             drawSmallIcon(ctx, 40, theme.bg, theme.accent, theme.text);
         }
+    }
+    
+    function updateAllIcons(theme) {
+        updateSmallIcon(theme, 'dtIconCanvas');
+        updateSmallIcon(theme, 'dtIconCanvas2');
+        updateSmallIcon(theme, 'dtIconCanvas3');
+        updateSmallIcon(theme, 'dtIconCanvas4');
+        updateSmallIcon(theme, 'dtIconCanvas5');
     }
     
     // ========== 主题装饰 SVG ==========
@@ -1296,20 +2088,20 @@
         if (container) container.innerHTML = getThemeDecoration(themeKey);
     }
     
-    // ========== 主题颜色切换 ==========
+    // ========== 主题颜色切换 - 简化版，避免文字颜色冲突 ==========
     const themeDefinitions = {
-        default: { name: "经典森林", bg: "#2d6a4f", accent: "#ff8c42", text: "#ffffff", headerBg: "rgba(255,255,250,0.95)", border: "#ff8c42" },
-        ocean: { name: "深海蓝", bg: "#1a5276", accent: "#48c9b0", text: "#ffffff", headerBg: "rgba(255,255,250,0.95)", border: "#48c9b0" },
-        sunset: { name: "热情红橙", bg: "#c44536", accent: "#f4d03f", text: "#ffffff", headerBg: "rgba(255,255,250,0.95)", border: "#f4d03f" },
-        purple: { name: "紫罗兰", bg: "#6c3483", accent: "#f7dc6f", text: "#ffffff", headerBg: "rgba(255,255,250,0.95)", border: "#f7dc6f" },
+        default: { name: "经典森林", bg: "#2d6a4f", accent: "#ff8c42", text: "#1e3a2f", headerBg: "rgba(255,255,250,0.95)", border: "#ff8c42" },
+        ocean: { name: "深海蓝", bg: "#1a5276", accent: "#48c9b0", text: "#1e3a2f", headerBg: "rgba(255,255,250,0.95)", border: "#48c9b0" },
+        sunset: { name: "热情红橙", bg: "#c44536", accent: "#f4d03f", text: "#1e3a2f", headerBg: "rgba(255,255,250,0.95)", border: "#f4d03f" },
+        purple: { name: "紫罗兰", bg: "#6c3483", accent: "#f7dc6f", text: "#1e3a2f", headerBg: "rgba(255,255,250,0.95)", border: "#f7dc6f" },
         midnight: { name: "暗夜黑", bg: "#1a1a2e", accent: "#e94560", text: "#ffffff", headerBg: "#1a1a2e", border: "#e94560" },
-        cherry: { name: "樱花粉", bg: "#c44569", accent: "#f8c291", text: "#ffffff", headerBg: "rgba(255,255,250,0.95)", border: "#f8c291" },
-        sunny: { name: "阳光黄", bg: "#d4ac0d", accent: "#e67e22", text: "#2c3e50", headerBg: "rgba(255,255,250,0.95)", border: "#e67e22" },
-        gold: { name: "冠军金", bg: "#7d6608", accent: "#f9e79f", text: "#ffffff", headerBg: "rgba(255,255,250,0.95)", border: "#f9e79f" },
-        mint: { name: "薄荷绿", bg: "#1abc9c", accent: "#e74c3c", text: "#2c3e50", headerBg: "rgba(255,255,250,0.95)", border: "#e74c3c" },
-        autumn: { name: "秋日橙", bg: "#d35400", accent: "#f39c12", text: "#ffffff", headerBg: "rgba(255,255,250,0.95)", border: "#f39c12" },
-        sapphire: { name: "宝石蓝", bg: "#2471a3", accent: "#f1c40f", text: "#ffffff", headerBg: "rgba(255,255,250,0.95)", border: "#f1c40f" },
-        forest: { name: "松石绿", bg: "#0e6655", accent: "#eb984e", text: "#ffffff", headerBg: "rgba(255,255,250,0.95)", border: "#eb984e" }
+        cherry: { name: "樱花粉", bg: "#c44569", accent: "#f8c291", text: "#1e3a2f", headerBg: "rgba(255,255,250,0.95)", border: "#f8c291" },
+        sunny: { name: "阳光黄", bg: "#d4ac0d", accent: "#e67e22", text: "#1e3a2f", headerBg: "rgba(255,255,250,0.95)", border: "#e67e22" },
+        gold: { name: "冠军金", bg: "#7d6608", accent: "#f9e79f", text: "#1e3a2f", headerBg: "rgba(255,255,250,0.95)", border: "#f9e79f" },
+        mint: { name: "薄荷绿", bg: "#1abc9c", accent: "#e74c3c", text: "#1e3a2f", headerBg: "rgba(255,255,250,0.95)", border: "#e74c3c" },
+        autumn: { name: "秋日橙", bg: "#d35400", accent: "#f39c12", text: "#1e3a2f", headerBg: "rgba(255,255,250,0.95)", border: "#f39c12" },
+        sapphire: { name: "宝石蓝", bg: "#2471a3", accent: "#f1c40f", text: "#1e3a2f", headerBg: "rgba(255,255,250,0.95)", border: "#f1c40f" },
+        forest: { name: "松石绿", bg: "#0e6655", accent: "#eb984e", text: "#1e3a2f", headerBg: "rgba(255,255,250,0.95)", border: "#eb984e" }
     };
     
     function shadeColor(color, percent) {
@@ -1327,39 +2119,55 @@
     function applyTheme(themeKey) {
         const theme = themeDefinitions[themeKey];
         if (!theme) return;
-        updateSmallIcon(theme);
+        updateAllIcons(theme);
         updateThemeDecoration(themeKey);
+        
+        // 只修改背景和边框，不修改文字颜色
         document.body.style.background = `linear-gradient(145deg, ${theme.bg}20, ${theme.accent}20)`;
-        document.querySelectorAll('.card:not(.goal-card-fixed):not(.encouragement-section)').forEach(card => {
-            card.style.background = theme.headerBg === "#1a1a2e" ? "#2d2d44" : "white";
-            card.style.color = theme.text;
+        
+        // 修改卡片背景
+        document.querySelectorAll('.card:not(.goal-card-fixed)').forEach(card => {
+            if (themeKey === 'midnight') {
+                card.style.background = "#2d2d44";
+                card.style.color = "#ffffff";
+            } else {
+                card.style.background = "white";
+                card.style.color = "#1e3a2f";
+            }
             card.style.borderColor = `${theme.bg}40`;
         });
-        document.querySelectorAll('.encouragement-section').forEach(section => {
-            section.style.background = "rgba(255,245,220,0.7)";
-            section.style.color = "#b85c1a";
+        
+        // 修改头部和底部导航
+        document.querySelectorAll('.header').forEach(header => {
+            header.style.background = themeKey === 'midnight' ? '#1a1a2e' : 'rgba(255,255,250,0.95)';
+            if (themeKey === 'midnight') {
+                header.style.color = '#ffffff';
+            }
         });
-        document.querySelectorAll('.stat-item').forEach(item => item.style.background = `${theme.bg}10`);
+        document.querySelectorAll('.bottom-nav').forEach(nav => {
+            nav.style.background = themeKey === 'midnight' ? '#1a1a2e' : 'rgba(255,255,250,0.95)';
+        });
+        
+        // 修改进度条
         document.querySelectorAll('.progress-bar-bg').forEach(bar => bar.style.background = `${theme.bg}30`);
         document.querySelectorAll('.progress-fill').forEach(fill => fill.style.background = `linear-gradient(90deg, ${theme.bg}, ${theme.accent})`);
-        document.querySelectorAll('.header').forEach(header => header.style.background = theme.headerBg);
-        document.querySelectorAll('.bottom-nav').forEach(nav => nav.style.background = theme.headerBg);
+        
+        // 修改按钮
         document.querySelectorAll('.btn-primary').forEach(btn => btn.style.background = `linear-gradient(135deg, ${theme.bg}, ${theme.accent})`);
-        document.querySelectorAll('.week-chip.active').forEach(chip => chip.style.background = `linear-gradient(135deg, ${theme.bg}, ${theme.accent})`);
-        document.querySelectorAll('.stats-btn.active').forEach(btn => btn.style.background = theme.accent);
-        document.querySelectorAll('.fab').forEach(fab => fab.style.background = `linear-gradient(135deg, ${theme.bg}, ${theme.accent})`);
-        document.querySelectorAll('.add-todo-btn, #addTodoBtn').forEach(btn => btn.style.background = theme.accent);
-        document.querySelectorAll('.goal-update-btn').forEach(btn => btn.style.background = theme.accent);
-        document.querySelectorAll('th').forEach(th => th.style.color = theme.accent);
-        document.querySelectorAll('.stat-number').forEach(num => num.style.color = theme.accent);
-        document.querySelectorAll('.time-col').forEach(tc => tc.style.color = theme.accent);
+        
+        // 修改h2边框颜色
         document.querySelectorAll('.card h2').forEach(h2 => {
-            h2.style.color = theme.bg;
+            h2.style.color = themeKey === 'midnight' ? '#ff8c42' : theme.bg;
             h2.style.borderLeftColor = theme.accent;
         });
-        document.querySelectorAll('.header .energy-badge').forEach(badge => badge.style.color = theme.accent);
+        
+        // 修改统计数字颜色
+        document.querySelectorAll('.stat-number').forEach(num => num.style.color = theme.accent);
+        document.querySelectorAll('th').forEach(th => th.style.color = theme.accent);
+        
+        // 修改导航激活状态
         document.querySelectorAll('.nav-item.active .nav-label').forEach(label => label.style.color = theme.accent);
-        document.querySelectorAll('.goal-value').forEach(gv => gv.style.color = theme.accent);
+        
         localStorage.setItem('app_theme', themeKey);
         document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelector(`.theme-btn[data-theme="${themeKey}"]`)?.classList.add('active');
